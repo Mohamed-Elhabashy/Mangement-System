@@ -10,34 +10,44 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
     public class PaySalaryDbRepoitories : IRepository<PaySalary>
     {
         readonly private EntitiesDbContext dbContext;
-        public PaySalary Add(PaySalary Entity)
+        public PaySalaryDbRepoitories(EntitiesDbContext _dbContext)
         {
-            throw new NotImplementedException();
+            dbContext = _dbContext;
+        }
+        public PaySalary Add(PaySalary paySalary)
+        {
+            dbContext.PaySalaries.Add(paySalary);
+            commit();
+            return paySalary;
         }
 
         public void commit()
         {
-            throw new NotImplementedException();
+            dbContext.SaveChanges();
         }
 
         public void delete(int id)
         {
-            throw new NotImplementedException();
+            var paysalary = Find(id);
+            if (paysalary == null) return;
+            dbContext.PaySalaries.Remove(paysalary);
+            commit();
         }
 
         public PaySalary Find(int id)
         {
-            throw new NotImplementedException();
+            return dbContext.PaySalaries.FirstOrDefault(p => p.PaySalaryId == id);
         }
 
         public IList<PaySalary> List()
         {
-            throw new NotImplementedException();
+            return dbContext.PaySalaries.ToList();
         }
 
-        public void update(PaySalary Entity)
+        public void update(PaySalary paySalary)
         {
-            throw new NotImplementedException();
+            dbContext.PaySalaries.Update(paySalary);
+            commit();
         }
     }
 }
