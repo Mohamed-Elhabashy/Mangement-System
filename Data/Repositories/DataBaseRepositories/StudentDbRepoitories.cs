@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mangement_System.Data.Repositories.DataBaseRepositories
 {
-    public class StudentDbRepoitories : IRepository<Student>
+    public class StudentDbRepoitories : IRepositoryStudent<Student>
     {
         readonly private EntitiesDbContext dbContext;
         public StudentDbRepoitories(EntitiesDbContext _dbContext)
@@ -42,6 +42,13 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         public IList<Student> List()
         {
             return dbContext.students.ToList();
+        }
+
+        public IList<Student> ListSpecificStudent(int? groupId)
+        {
+            
+           return dbContext.students.Where(s => s.GroupId == groupId).ToList();
+            
         }
 
         public void update(Student student)

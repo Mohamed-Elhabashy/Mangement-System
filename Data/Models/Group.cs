@@ -13,7 +13,8 @@ namespace Mangement_System.Data.Models
         }
         public int groupId { get; set; }
         public string GroupName { get; set; }
-        public string Instructor { get; set; }
         public virtual ICollection<Student> Students{ get; set; }
+        public int EmployeeId { get; set; }
+        public Employee employee { get; set; }
     }
 }
