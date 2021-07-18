@@ -24,7 +24,15 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                         }
-
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Employee" asp-action="Index">الموظفين</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Group" asp-action="Index">المجموعات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="WaitingStudent" asp-action="Index">قوائم الأنتظار</a>
+                        </li>
 
                     </ul>
                     <partial name="_LoginPartial" />

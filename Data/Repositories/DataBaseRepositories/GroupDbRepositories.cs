@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mangement_System.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mangement_System.Data.Repositories.DataBaseRepositories
 {
@@ -36,12 +37,16 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
 
         public Group Find(int id)
         {
-            return dbContext.groups.FirstOrDefault(g => g.groupId == id);
+            return dbContext.groups
+                .Include(e=>e.employee)
+                .FirstOrDefault(g => g.groupId == id);
         }
 
         public IList<Group> List()
         {
-            return dbContext.groups.ToList();
+            return dbContext.groups
+                .Include(e => e.employee)
+                .ToList();
         }
 
         public void update(Group group)

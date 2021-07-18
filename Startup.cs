@@ -1,4 +1,7 @@
 using Mangement_System.Data;
+using Mangement_System.Data.Models;
+using Mangement_System.Data.Repositories.DataBaseRepositories;
+using Mangement_System.Data.Repositories.Interfaces;
 using Mangement_System.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +42,9 @@ namespace Mangement_System
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI().AddDefaultTokenProviders();
             services.AddControllersWithViews();
+            services.AddScoped<IRepositoryStudent<Student>, StudentDbRepoitories>();
+            services.AddScoped<IRepository<Group>, GroupDbRepositories>();
+            services.AddScoped<IRepository<Employee>, EmployeeDbRepoitories>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
