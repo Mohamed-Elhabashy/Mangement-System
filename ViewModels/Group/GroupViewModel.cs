@@ -8,8 +8,9 @@ namespace Mangement_System.ViewModels.Group
 {
     public class GroupViewModel
     {
+        public int GroupId { get; set; }
         public string GroupName { get; set; }
         public int EmployeeId { get; set; }
-        public IEnumerable<Employee> emplyee { get; set; }
+        public List<Employee> emplyee { get; set; }
     }
 }

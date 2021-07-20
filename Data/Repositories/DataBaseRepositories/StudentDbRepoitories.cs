@@ -1,5 +1,6 @@
 ﻿using Mangement_System.Data.Models;
 using Mangement_System.Data.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,18 +37,24 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
 
         public Student Find(int id)
         {
-            return dbContext.students.FirstOrDefault(s => s.studentId == id);
+            return dbContext.students
+                .Include(g=>g.Group)
+                .FirstOrDefault(s => s.studentId == id);
         }
 
         public IList<Student> List()
         {
-            return dbContext.students.ToList();
+            return dbContext.students
+                .Include(g => g.Group)
+                .ToList();
         }
 
         public IList<Student> ListSpecificStudent(int? groupId)
         {
             
-           return dbContext.students.Where(s => s.GroupId == groupId).ToList();
+           return dbContext.students
+                .Include(g => g.Group)
+                .Where(s => s.GroupId == groupId).ToList();
             
         }
 

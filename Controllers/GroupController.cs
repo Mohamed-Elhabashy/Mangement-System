@@ -29,12 +29,12 @@ namespace Mangement_System.Controllers
         {
             var model = new GroupViewModel()
             {
-                emplyee = EmployeeRepo.List().Where(e => e.Role == "محفظ")
+                emplyee = EmployeeRepo.List().Where(e => e.Role == "محفظ").ToList()
             };
             return View(model);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(GroupViewModel model)
@@ -43,8 +43,8 @@ namespace Mangement_System.Controllers
             {
                 var group = new Group()
                 {
-                    GroupName=model.GroupName,
-                    EmployeeId=model.EmployeeId
+                    GroupName = model.GroupName,
+                    EmployeeId = model.EmployeeId
                 };
                 groups.Add(group);
                 return RedirectToAction(nameof(Index));
@@ -55,19 +55,35 @@ namespace Mangement_System.Controllers
             }
         }
 
-        // GET: GroupController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var group = groups.Find(id);
+
+            if (group == null) return RedirectToAction("Index", "Home");
+
+            var model = new GroupViewModel()
+            {
+                GroupId = id,
+                GroupName = group.GroupName,
+                emplyee = EmployeeRepo.List().Where(e => e.Role == "محفظ" && e.EmployeeId != group.EmployeeId).ToList()
+            };
+            model.emplyee.Insert(0,group.employee);
+            return View(model);
         }
 
-        // POST: GroupController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(GroupViewModel model)
         {
             try
             {
+                Group item = new Group
+                {
+                    groupId = model.GroupId,
+                    GroupName = model.GroupName,
+                    EmployeeId = model.EmployeeId
+                };
+                groups.update(item);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -75,20 +91,26 @@ namespace Mangement_System.Controllers
                 return View();
             }
         }
-
-        // GET: GroupController/Delete/5
+        public ActionResult Details(int id)
+        {
+            var group = groups.Find(id);
+            if(group==null) return RedirectToAction("Index", "Home");
+            return View(group);
+        }
         public ActionResult Delete(int id)
         {
-            return View();
+            var group = groups.Find(id);
+            if (group == null) return RedirectToAction("Index", "Home");
+            return View(group);
         }
 
-        // POST: GroupController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Group group)
         {
             try
             {
+                groups.delete(group.groupId);
                 return RedirectToAction(nameof(Index));
             }
             catch

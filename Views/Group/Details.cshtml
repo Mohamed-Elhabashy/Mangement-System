@@ -1,39 +1,41 @@
-﻿@model IEnumerable<Mangement_System.Data.Models.Student>
+﻿@model Mangement_System.Data.Models.Group
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Details";
 }
 
-<h1>Index</h1>
+<h1>Details</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <h3>اسم الجروب : @Model.GroupName</h3>
+    <h3>المحفظ : @Model.employee.Name</h3>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StudentName)
+               StudentName
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.school)
+                school
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.phone)
+                phone
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FatherJob)
+                FatherJob
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Birthdate)
+                Birthdate
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Joinplace)
+                Joinplace
             </th>
+            
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Students) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.StudentName)
@@ -54,9 +56,11 @@
                 @Html.DisplayFor(modelItem => item.Joinplace)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.studentId">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.studentId">Delete</a>|
-                <a asp-action="AddToGroup" asp-route-id="@item.studentId">Add To Group</a>
+                @Html.DisplayFor(modelItem => item.Group.groupId)
+            </td>
+            <td>
+                <a asp-action="MoveToGroup" asp-route-id="@item.studentId">Move</a> |
+                <a asp-controller="WaitingStudent" asp-action="Delete" asp-route-id="@item.studentId">Delete</a>
             </td>
         </tr>
 }
