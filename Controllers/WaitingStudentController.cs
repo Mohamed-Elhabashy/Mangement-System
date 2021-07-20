@@ -1,5 +1,6 @@
 ﻿using Mangement_System.Data.Models;
 using Mangement_System.Data.Repositories.Interfaces;
+using Mangement_System.ViewModels.Student;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,9 +13,11 @@ namespace Mangement_System.Controllers
     public class WaitingStudentController : Controller
     {
         readonly private IRepositoryStudent<Student> students;
-        public WaitingStudentController(IRepositoryStudent<Student> _students)
+        readonly private IRepository<Group> groups;
+        public WaitingStudentController(IRepositoryStudent<Student> _students, IRepository<Group> _groups)
         {
             students = _students;
+            groups = _groups;
         }
         public ActionResult Index()
         {
@@ -34,6 +37,7 @@ namespace Mangement_System.Controllers
         {
             try
             {
+                student.Joinplace = DateTime.Now;
                 students.Add(student);
                 return RedirectToAction(nameof(Index));
             }
@@ -79,7 +83,40 @@ namespace Mangement_System.Controllers
         {
             try
             {
+                int? groupId = students.Find(student.studentId).GroupId;
                 students.delete(student.studentId);
+                if (groupId == null)
+                {
+                    //return to page Index that show all Waiting Student
+                    return RedirectToAction(nameof(Index));
+                }
+                //return to page Detials in Group that show all Student in this group
+                return RedirectToAction("Details","Group",new { id=groupId });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult AddToGroup(int id)
+        {
+            var student= students.Find(id);
+            if (student == null) return Redirect("Index");
+            StudentAddInGroupViewModel model = new StudentAddInGroupViewModel
+            {
+                student = student,
+                Listgroup = groups.List()
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult AddToGroup(int StudentId,int GroupId)
+        {
+            try
+            {
+                var student = students.Find(StudentId);
+                student.GroupId = GroupId;
+                students.update(student);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -87,5 +124,6 @@ namespace Mangement_System.Controllers
                 return View();
             }
         }
+
     }
 }

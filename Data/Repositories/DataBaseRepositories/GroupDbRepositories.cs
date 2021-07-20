@@ -39,6 +39,7 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         {
             return dbContext.groups
                 .Include(e=>e.employee)
+                .Include(s=>s.Students)
                 .FirstOrDefault(g => g.groupId == id);
         }
 
