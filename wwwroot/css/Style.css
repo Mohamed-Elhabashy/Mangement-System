@@ -1,0 +1,15 @@
+﻿p {
+    float:right;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #0366d6;
+    margin-bottom:30px;
+}
+#Table {
+    direction: rtl;
+}
+tr {
+    color: #0366d6;
+    text-align:center;
+}

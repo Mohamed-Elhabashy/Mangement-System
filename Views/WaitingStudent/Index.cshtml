@@ -3,62 +3,56 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
 <p>
-    <a asp-action="Create">Create New</a>
+    <a style="text-decoration:none" asp-action="Create">إضافة طالب</a>
 </p>
-<table class="table">
-    <thead>
+<div class="table-responsive" id="Table">
+    <table class="table table-bordered table-striped th-center">
+        <thead>
+            <tr class="no-break">
+                <th width="3%">#</th>
+                <th>اسم الطالب</th>
+                <th width="11%">المدرسة</th>
+                <th width="11%">رقم الوالد</th>
+                <th width="11%">وظيفة الأب</th>
+                <th width="11%">تاريخ الميلاد</th>
+                <th width="11%">تاريخ التقديم</th>
+                <th width="20%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <!-- if Not Result -->
+                    <td colspan="7"><b>لا يوجد بيانات</b></td>
+                </tr>
+            }
+            @{int i = 1; }
+            @foreach (var item in Model)
+            {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.StudentName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.school)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FatherJob)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Birthdate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Joinplace)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
+            <td class="no-break">@i</td>
             <td>
-                @Html.DisplayFor(modelItem => item.StudentName)
+                @item.StudentName
             </td>
+            <td>@item.school</td>
+            <td>@item.phone</td>
+            <td>@item.FatherJob</td>
+            <td>@item.Birthdate.ToString("yyyy/MM/dd")</td>
+            <td>@item.Joinplace.ToString("yyyy/MM/dd")</td>
             <td>
-                @Html.DisplayFor(modelItem => item.school)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FatherJob)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Birthdate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Joinplace)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.studentId">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.studentId">Delete</a>|
-                <a asp-action="AddToGroup" asp-route-id="@item.studentId">Add To Group</a>
+                <a style="text-decoration:none" asp-action="Edit" asp-route-id="@item.studentId">تعديل</a> 
+                <br />
+                <a style="text-decoration:none" asp-action="Delete" asp-route-id="@item.studentId">حذف</a>
+                <br />
+                <a style="text-decoration:none" asp-action="AddToGroup" asp-route-id="@item.studentId">إضافة لجروب</a>
             </td>
         </tr>
-}
-    </tbody>
-</table>
+                i++;
+            }
+            
+        </tbody>
+    </table>
+</div>
+
