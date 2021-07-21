@@ -41,11 +41,20 @@
                 <select name="GroupId" class="form-control">
                     @foreach (var item in Model.Listgroup)
                     {
-                        <option value="@item.groupId">@item.GroupName</option>
+                        if (Model.student.GroupId == item.groupId)
+                        {
+                            <option selected value="@item.groupId">@item.GroupName</option>
+                        }
+
+                        else
+                        {
+                            <option value="@item.groupId">@item.GroupName</option>
+                        }
+
                     }
                 </select>
             </div>
-            <input hidden name="StudentId" value="@Model.student.studentId"/>
+            <input hidden name="StudentId" value="@Model.student.studentId" />
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" />
             </div>
@@ -53,9 +62,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

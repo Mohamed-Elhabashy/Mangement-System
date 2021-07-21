@@ -115,9 +115,12 @@ namespace Mangement_System.Controllers
             try
             {
                 var student = students.Find(StudentId);
+                var LastGroupId = student.GroupId;
                 student.GroupId = GroupId;
                 students.update(student);
+                if (LastGroupId==null)
                 return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details","Group",new { id=GroupId});
             }
             catch
             {

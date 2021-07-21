@@ -59,7 +59,7 @@
                 @Html.DisplayFor(modelItem => item.Group.groupId)
             </td>
             <td>
-                <a asp-action="MoveToGroup" asp-route-id="@item.studentId">Move</a> |
+                <a asp-controller="WaitingStudent" asp-action="AddToGroup" asp-route-id="@item.studentId">Move</a> |
                 <a asp-controller="WaitingStudent" asp-action="Delete" asp-route-id="@item.studentId">Delete</a>
             </td>
         </tr>
