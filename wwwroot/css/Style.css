@@ -1,15 +1,41 @@
 ﻿p {
-    float:right;
+    float: right;
     font-size: 25px;
     font-weight: bold;
     text-decoration: none;
     color: #0366d6;
-    margin-bottom:30px;
+    margin-bottom: 30px;
 }
+
 #Table {
     direction: rtl;
 }
+
 tr {
     color: #0366d6;
-    text-align:center;
+    text-align: center;
+}
+
+.row {
+    direction: rtl;
+    margin: 10px;
+}
+
+label {
+    float: right;
+    margin: 5px;
+}
+
+input {
+    float: right;
+}
+
+span {
+    display: block;
+    text-align: right;
+}
+.DeletedMessage{
+    float:right;
+    display:block;
+    font-size:25px;
 }

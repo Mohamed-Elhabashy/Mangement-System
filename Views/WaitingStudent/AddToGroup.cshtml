@@ -3,41 +3,36 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Add</h1>
-
-<h4>Student</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddToGroup" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="@Model.student.StudentName" class="control-label"></label>
+                <label class="control-label">اسم الطالب</label>
                 <input readonly value="@Model.student.StudentName" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="@Model.student.school" class="control-label"></label>
+                <label class="control-label">المدرسة</label>
                 <input readonly value="@Model.student.school" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="@Model.student.phone" class="control-label"></label>
+                <label class="control-label">رقم الوالد</label>
                 <input readonly value="@Model.student.phone" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="@Model.student.FatherJob" class="control-label"></label>
+                <label  class="control-label">وظيفة الوالد</label>
                 <input readonly value="@Model.student.FatherJob" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="@Model.student.Birthdate" class="control-label"></label>
-                <input readonly value="@Model.student.Birthdate" class="form-control" />
+                <label class="control-label">تاريخ الميلاد</label>
+                <input readonly value="@Model.student.Birthdate.ToString("yyyy/MM/dd")" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="@Model.student.Joinplace" class="control-label"></label>
-                <input readonly value="@Model.student.Joinplace" class="form-control" />
+                <label class="control-label">تاريخ التقديم</label>
+                <input readonly value="@Model.student.Joinplace.ToString("yyyy/MM/dd")" class="form-control" />
             </div>
             <div class="form-group">
-                <label class="control-label">Group</label>
+                <label class="control-label">المجموعة</label>
                 <select name="GroupId" class="form-control">
                     @foreach (var item in Model.Listgroup)
                     {
@@ -56,7 +51,7 @@
             </div>
             <input hidden name="StudentId" value="@Model.student.studentId" />
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" />
+                <input type="submit" value="أضف" class="btn btn-primary" />
             </div>
         </form>
     </div>

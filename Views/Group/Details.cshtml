@@ -4,65 +4,69 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
 <p>
-    <h3>اسم الجروب : @Model.GroupName</h3>
-    <h3>المحفظ : @Model.employee.Name</h3>
+    <span>اسم المجموعة : @Model.GroupName</span>
+
+    <span>المحفظ : @Model.employee.Name</span>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-               StudentName
-            </th>
-            <th>
-                school
-            </th>
-            <th>
-                phone
-            </th>
-            <th>
-                FatherJob
-            </th>
-            <th>
-                Birthdate
-            </th>
-            <th>
-                Joinplace
-            </th>
-            
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Students) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StudentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.school)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FatherJob)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Birthdate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Joinplace)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Group.groupId)
-            </td>
-            <td>
-                <a asp-controller="WaitingStudent" asp-action="AddToGroup" asp-route-id="@item.studentId">Move</a> |
-                <a asp-controller="WaitingStudent" asp-action="Delete" asp-route-id="@item.studentId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="table-responsive" id="Table">
+    <table class="table table-bordered table-striped th-center">
+        <thead>
+            <tr class="no-break">
+                <th width="3%">#</th>
+                <th>اسم الطالب</th>
+                <th width="11%">المدرسة</th>
+                <th width="11%">رقم الوالد</th>
+                <th width="11%">وظيفة الأب</th>
+                <th width="11%">تاريخ الميلاد</th>
+                <th width="11%">تاريخ التقديم</th>
+                <th width="20%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Students.Count() == 0)
+            {
+                <tr>
+                    <!-- if Not Result -->
+                    <td colspan="7"><b>لا يوجد بيانات</b></td>
+                </tr>
+            }
+            @{int i = 1; }
+            @foreach (var item in Model.Students)
+            {
+
+                string datearabic = item.Joinplace.ToString("yyyy/MM/dd").Replace('0', '\u06f0')
+                    .Replace('1', '\u06f1')
+                    .Replace('2', '\u06f2')
+                    .Replace('3', '\u06f3')
+                    .Replace('4', '\u06f4')
+                    .Replace('5', '\u06f5')
+                    .Replace('6', '\u06f6')
+                    .Replace('7', '\u06f7')
+                    .Replace('8', '\u06f8')
+                    .Replace('9', '\u06f9');
+
+                <tr>
+                    <td class="no-break">@i</td>
+                    <td>
+                        @item.StudentName
+                    </td>
+                    <td>@item.school</td>
+                    <td>@item.phone</td>
+                    <td>@item.FatherJob</td>
+                    <td>@item.Birthdate.ToString("yyyy/MM/dd")</td>
+                    <td>@datearabic</td>
+                    <td>
+                        <a style="text-decoration:none" asp-controller="WaitingStudent" asp-action="Edit" asp-route-id="@item.studentId">تعديل</a>
+                        <br />
+                        <a style="text-decoration:none" asp-controller="WaitingStudent" asp-action="AddToGroup" asp-route-id="@item.studentId">نقل</a>
+                        <br />
+                        <a style="text-decoration:none" asp-controller="WaitingStudent" asp-action="Delete" asp-route-id="@item.studentId">حذف</a>
+                    </td>
+                </tr>
+                i++;
+            }
+
+        </tbody>
+    </table>
+</div>
