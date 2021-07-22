@@ -4,61 +4,55 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
 <p>
-    <a asp-action="Create">Create New</a>
+    <a style="text-decoration:none" asp-action="Create">إضافة موظف</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Role)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salary)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Birthdate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JoinInStaff)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Birthdate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JoinInStaff)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="table-responsive" id="Table">
+    <table class="table table-bordered table-striped th-center">
+        <thead>
+            <tr class="no-break">
+                <th width="3%">#</th>
+                <th>الاسم</th>
+                <th width="11%">البلد</th>
+                <th width="11%">الوظيفه</th>
+                <th width="11%">المرتب</th>
+                <th width="11%">تاريخ الميلاد</th>
+                <th width="11%">تاريخ الالتحاق</th>
+                <th width="20%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <!-- if Not Result -->
+                    <td colspan="7"><b>لا يوجد بيانات</b></td>
+                </tr>
+            }
+            @{int i = 1; }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="no-break">@i</td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>@item.country</td>
+                    <td>@item.Role</td>
+                    <td>@item.Salary</td>
+                    <td>@item.Birthdate.ToString("yyyy/MM/dd")</td>
+                    <td>@item.JoinInStaff.ToString("yyyy/MM/dd")</td>
+                    <td>
+                        <a style="text-decoration:none" asp-action="Edit" asp-route-id="@item.EmployeeId">تعديل</a>
+                        <br />
+                        <a style="text-decoration:none" asp-action="Delete" asp-route-id="@item.EmployeeId">حذف</a>
+                        
+                    </td>
+                </tr>
+                i++;
+            }
+
+        </tbody>
+    </table>
+</div>
+

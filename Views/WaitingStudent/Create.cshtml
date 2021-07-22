@@ -4,49 +4,44 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Student</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="StudentName" class="control-label"></label>
+                <label class="control-label">اسم الطالب</label>
                 <input asp-for="StudentName" class="form-control" />
                 <span asp-validation-for="StudentName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="school" class="control-label"></label>
+                <label class="control-label">المدرسة</label>
                 <input asp-for="school" class="form-control" />
                 <span asp-validation-for="school" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="phone" class="control-label"></label>
+                <label class="control-label">رقم الوالد</label>
                 <input asp-for="phone" class="form-control" />
                 <span asp-validation-for="phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FatherJob" class="control-label"></label>
+                <label  class="control-label">وظيفة الوالد</label>
                 <input asp-for="FatherJob" class="form-control" />
                 <span asp-validation-for="FatherJob" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Birthdate" class="control-label"></label>
+                <label class="control-label">تاريخ الميلاد</label>
                 <input asp-for="Birthdate" class="form-control" />
                 <span asp-validation-for="Birthdate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="إضافة" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
