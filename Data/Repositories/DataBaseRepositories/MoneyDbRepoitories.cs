@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mangement_System.Data.Repositories.DataBaseRepositories
 {
-    public class MoneyDbRepoitories : IRepository<Money>
+    public class MoneyDbRepoitories : IRepositoryMoney<Money>
     {
         readonly private EntitiesDbContext dbContext;
         public MoneyDbRepoitories(EntitiesDbContext _dbContext)
@@ -42,6 +42,11 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         public IList<Money> List()
         {
             return dbContext.money.ToList();
+        }
+
+        public IList<Money> ListType(int type)
+        {
+            return dbContext.money.Where(m => m.TypeMoney == type).ToList();
         }
 
         public void update(Money money)

@@ -1,19 +1,20 @@
-﻿@model IEnumerable<Mangement_System.Data.Models.Group>
+﻿@model IEnumerable<Mangement_System.Data.Models.Money>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <p>
-    <a style="text-decoration:none" asp-action="Create">إضافة مجموعة</a>
+    <a style="text-decoration:none" asp-action="Create">إضافة</a>
 </p>
 <div class="table-responsive" id="Table">
     <table class="table table-bordered table-striped th-center">
         <thead>
             <tr class="no-break">
                 <th width="3%">#</th>
-                <th>اسم المجموعة</th>
-                <th width="11%">المحفظ</th>
+                <th>الاسم</th>
+                <th width="11%">المبلغ</th>
+                <th width="11%">التاريخ</th>
                 <th width="20%"></th>
             </tr>
         </thead>
@@ -32,15 +33,15 @@
                 <tr>
                     <td class="no-break">@i</td>
                     <td>
-                        <a style="text-decoration:none" asp-action="Details" asp-route-id="@item.groupId">@item.GroupName</a>
-</td>
-                    <td>@item.employee.Name</td>
+                        @item.MoneyName
+                    </td>
+                    <td>@item.TotalMoney</td>
+                    <td>@item.DateOfMoney.ToString("yyyy/MM/dd")</td>
+                    
                     <td>
-                        <a style="text-decoration:none" asp-action="Details" asp-route-id="@item.groupId">تفاصيل</a>
+                        <a style="text-decoration:none" asp-action="Edit" asp-route-id="@item.MoneyId">تعديل</a>
                         <br />
-                        <a style="text-decoration:none" asp-action="Edit" asp-route-id="@item.groupId">تعديل</a>
-                        <br />
-                        <a style="text-decoration:none" asp-action="Delete" asp-route-id="@item.groupId">حذف</a>
+                        <a style="text-decoration:none" asp-action="Delete" asp-route-id="@item.MoneyId">حذف</a>
                     </td>
                 </tr>
                 i++;
@@ -49,3 +50,4 @@
         </tbody>
     </table>
 </div>
+

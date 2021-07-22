@@ -45,6 +45,7 @@ namespace Mangement_System
             services.AddScoped<IRepositoryStudent<Student>, StudentDbRepoitories>();
             services.AddScoped<IRepository<Group>, GroupDbRepositories>();
             services.AddScoped<IRepository<Employee>, EmployeeDbRepoitories>();
+            services.AddScoped<IRepositoryMoney<Money>, MoneyDbRepoitories>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
