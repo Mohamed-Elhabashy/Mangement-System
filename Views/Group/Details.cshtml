@@ -4,11 +4,14 @@
     ViewData["Title"] = "Details";
 }
 
-<p>
-    <span>اسم المجموعة : @Model.GroupName</span>
+<div>
+    <a style="text-decoration:none" asp-action="payment" asp-route-id="@Model.groupId">الاشتراكات</a>
+    <p>
+        <span>اسم المجموعة : @Model.GroupName</span>
 
-    <span>المحفظ : @Model.employee.Name</span>
-</p>
+        <span>المحفظ : @Model.employee.Name</span>
+    </p>
+</div>
 <div class="table-responsive" id="Table">
     <table class="table table-bordered table-striped th-center">
         <thead>

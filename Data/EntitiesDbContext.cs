@@ -18,6 +18,7 @@ namespace Mangement_System.Data
         public DbSet<Money> money { get; set; }
         public DbSet<PaySalary> PaySalaries { get; set; }
         public DbSet<Student> students { get; set; }
+        public DbSet<PayStudent> payStudents { get; set; }
     }
 
 }
