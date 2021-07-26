@@ -1,6 +1,7 @@
 ﻿using Mangement_System.Data.Models;
 using Mangement_System.Data.Repositories.Interfaces;
 using Mangement_System.ViewModels.Group;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Mangement_System.Controllers
 {
+    [Authorize]
     public class GroupController : Controller
     {
         readonly private IRepository<Group> groups;
@@ -188,7 +190,7 @@ namespace Mangement_System.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPayStudent(PayStudent model)
         {
-            
+                model.student = null;
                 paystudentRepo.update(model);
                 return RedirectToAction("payment", new { id = 1 });
             

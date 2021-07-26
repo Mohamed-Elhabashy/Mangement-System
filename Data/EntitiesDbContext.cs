@@ -16,7 +16,6 @@ namespace Mangement_System.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Group> groups { get; set; }
         public DbSet<Money> money { get; set; }
-        public DbSet<PaySalary> PaySalaries { get; set; }
         public DbSet<Student> students { get; set; }
         public DbSet<PayStudent> payStudents { get; set; }
     }

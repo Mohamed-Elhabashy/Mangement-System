@@ -7,10 +7,7 @@ namespace Mangement_System.Data.Models
 {
     public class Employee
     {
-        public Employee()
-        {
-            PaySalaries = new HashSet<PaySalary>();
-        }
+        
         public int EmployeeId { get; set; }
         public string Name { get; set; }
         public string country { get; set; }
@@ -18,6 +15,5 @@ namespace Mangement_System.Data.Models
         public float Salary { get; set; }
         public DateTime Birthdate { get; set; }
         public DateTime JoinInStaff { get; set; }
-        public virtual ICollection<PaySalary> PaySalaries{ get; set; }
     }
 }
