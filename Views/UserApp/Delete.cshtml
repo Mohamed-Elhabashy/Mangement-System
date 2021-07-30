@@ -1,0 +1,27 @@
+﻿@model Mangement_System.Models.User
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+
+<p class="DeletedMessage">هل متاكد من حذف هذا الطالب ؟</p>
+<table class="table-responsive" id="Table">
+    <tr>
+        <th scope="row">اسم المستخدم :</th>
+        <td>@Model.UserName</td>
+    </tr>
+    <tr>
+        <th scope="row">الرقم السرى :</th>
+        <td>@Model.Password</td>
+    </tr>
+</table>
+
+
+<form asp-action="Delete">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <input type="submit" value="حذف" class="btn btn-danger" />
+</form>
+
+

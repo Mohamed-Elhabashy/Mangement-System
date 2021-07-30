@@ -46,27 +46,19 @@ namespace Mangement_System.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 1)]
-            [Display(Name = "FirstName")]
+            [Required(ErrorMessage = "لابد من إدخال الاسم الأول")]
             public string FirstName { get; set; }
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 1)]
-            [Display(Name = "LastName")]
+            [Required(ErrorMessage = "لابد من إدخال الاسم الأخير")]
             public string LastName { get; set; }
-            [Required]
-            [Display(Name = "UserName")]
+
+            [Required(ErrorMessage = "لابد من إدخال اسم المستخدم")]
             public string UserName { get; set; }
-            [Required]
+
+            [Required(ErrorMessage = "لابد من إدخال الرقم السرى")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
             public string Password { get; set; }
 
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -93,7 +85,7 @@ namespace Mangement_System.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    return LocalRedirect("~/");
+                    return LocalRedirect("~/UserApp");
                 }
                 foreach (var error in result.Errors)
                 {

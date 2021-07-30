@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Mangement_System.Data.Models;
 
 namespace Mangement_System.Data
 {
@@ -13,5 +14,6 @@ namespace Mangement_System.Data
             : base(options)
         {
         }
+        
     }
 }

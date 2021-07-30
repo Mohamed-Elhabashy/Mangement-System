@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Mangement_System.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a style="text-decoration:none" asp-area="Identity" asp-page="/Account/Register">إضافة مستخدم</a>
+</p>
+<div class="table-responsive" id="Table">
+    <table class="table table-bordered table-striped th-center">
+        <thead>
+            <tr class="no-break">
+                <th width="3%">#</th>
+                <th>اسم الأول</th>
+                <th>اسم الأخير</th>
+                <th>اسم المستخدم</th>
+                <th width="11%">الرقم السرى</th>
+                <th width="20%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <!-- if Not Result -->
+                    <td colspan="4"><b>لا يوجد بيانات</b></td>
+                </tr>
+            }
+            @{int i = 1; }
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td class="no-break">@i</td>
+            <td>
+                @item.FirstName
+            </td>
+            <td>
+                @item.LastName
+            </td>
+            <td>
+                @item.UserName
+            </td>
+            <td>@item.Password</td>
+            <td>
+                <a style="text-decoration:none" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+            </td>
+        </tr>
+                i++;
+            }
+
+        </tbody>
+    </table>
+</div>
+

@@ -44,6 +44,7 @@ namespace Mangement_System
             services.AddControllersWithViews();
             services.AddScoped<IRepositoryStudent<Student>, StudentDbRepoitories>();
             services.AddScoped<IRepository<Group>, GroupDbRepositories>();
+            services.AddScoped<IRepositoryUser<User>, UserDbRepoitories>();
             services.AddScoped<IRepository<Employee>, EmployeeDbRepoitories>();
             services.AddScoped<IRepositoryMoney<Money>, MoneyDbRepoitories>();
             services.AddScoped<IRepositoryPayStudent<PayStudent>, PayStudentDbRepoitories>();

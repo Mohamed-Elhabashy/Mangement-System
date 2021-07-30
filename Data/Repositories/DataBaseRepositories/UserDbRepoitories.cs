@@ -1,4 +1,5 @@
-﻿using Mangement_System.Data.Repositories.Interfaces;
+﻿
+using Mangement_System.Data.Repositories.Interfaces;
 using Mangement_System.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Mangement_System.Data.Repositories.DataBaseRepositories
 {
-    public class UserDbRepoitories : IRepository<User>
+    public class UserDbRepoitories : IRepositoryUser<User>
     {
         readonly private ApplicationDbContext dbContext;
         public UserDbRepoitories(ApplicationDbContext _dbContext)
@@ -26,7 +27,7 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
             dbContext.SaveChanges();
         }
 
-        public void delete(int id)
+        public void delete(string id)
         {
             var user = Find(id);
             if (user == null) return;
@@ -34,9 +35,10 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
             commit();
         }
 
-        public User Find(int id)
+        public User Find(string id)
         {
-            throw new NotImplementedException();
+            return dbContext.Users.FirstOrDefault(u => u.Id == id);
+
         }
 
         public IList<User> List()
