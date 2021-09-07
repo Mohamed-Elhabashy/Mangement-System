@@ -18,16 +18,11 @@ tr {
 
 .row {
     direction: rtl;
-    margin: 10px;
 }
 
 label {
     float: right;
     margin: 5px;
-}
-
-input {
-    float: right;
 }
 
 span {
@@ -89,12 +84,11 @@ h2 {
     padding: 30px;
     width: 90%;
     max-width: 450px;
-    position: relative;
-    padding: 0px;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     text-align: center;
 }
+
 
 #formFooter {
     background-color: #f6f6f6;
@@ -105,6 +99,12 @@ h2 {
     border-radius: 0 0 10px 10px;
 }
 
+.regM{
+    padding:20px 0px;
+}
+.regM h1{
+    margin:5px 0 20px 0;
+}
 
 
 /* TABS */
@@ -126,12 +126,12 @@ input[type=button], input[type=submit], input[type=reset] {
     background-color: #56baed;
     border: none;
     color: white;
-    padding: 15px 80px;
+    padding: 12px 70px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 14px;
     -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
     box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
     -webkit-border-radius: 5px 5px 5px 5px;
@@ -143,17 +143,17 @@ input[type=button], input[type=submit], input[type=reset] {
     transition: all 0.3s ease-in-out;
 }
 
-    input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
-        background-color: #39ace7;
-    }
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+    background-color: #39ace7;
+}
 
-    input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
-        -moz-transform: scale(0.95);
-        -webkit-transform: scale(0.95);
-        -o-transform: scale(0.95);
-        -ms-transform: scale(0.95);
-        transform: scale(0.95);
-    }
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
+    -moz-transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -o-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    transform: scale(0.95);
+}
 
 input[type=text] {
     background-color: #f6f6f6;
@@ -175,10 +175,10 @@ input[type=text] {
     border-radius: 5px 5px 5px 5px;
 }
 
-    input[type=text]:focus {
-        background-color: #fff;
-        border-bottom: 2px solid #5fbae9;
-    }
+input[type=text]:focus {
+    background-color: #fff;
+    border-bottom: 2px solid #5fbae9;
+}
 
 
 input[type=password] {
@@ -201,10 +201,10 @@ input[type=password] {
     border-radius: 5px 5px 5px 5px;
 }
 
-    input[type=password]:focus {
-        background-color: #fff;
-        border-bottom: 2px solid #5fbae9;
-    }
+input[type=password]:focus {
+    background-color: #fff;
+    border-bottom: 2px solid #5fbae9;
+}
 
 
 

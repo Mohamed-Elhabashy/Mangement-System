@@ -3,29 +3,28 @@
 @{
     ViewData["Title"] = "Register";
 }
-<div class="row">
-    <div class="col-md-4">
+
+<div class="row justify-content-center regM">
+    <div class="col-md-6">
+        <h1 class="text-center">إنشاء حساب</h1>
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label>الاسم الأول</label>
-                <input asp-for="Input.FirstName" class="form-control" />
+            <div class="form-group row">
+                <input asp-for="Input.FirstName" class="form-control form-control-lg" id="colFormLabelLg" placeholder="الاسم الأول">
             </div>
-            <div class="form-group">
-                <label>الأسم الأخير</label>
-                <input asp-for="Input.LastName" class="form-control" />
+            <div class="form-group row">
+                <input asp-for="Input.LastName" class="form-control form-control-lg" id="colFormLabelLg" placeholder="الأسم الأخير">
             </div>
-            <div class="form-group">
-                <label>أسم المستخدم</label>
-                <input asp-for="Input.UserName" class="form-control" />
+            <div class="form-group row">
+                <input asp-for="Input.UserName" class="form-control form-control-lg" id="colFormLabelLg" placeholder="أسم المستخدم">
             </div>
-            <div class="form-group">
-                <label>الرقم السرى</label>
-                <input asp-for="Input.Password" class="form-control" />
+            <div class="form-group row">
+                <input asp-for="Input.Password" class="form-control form-control-lg" id="colFormLabelLg" placeholder="الرقم السرى">
             </div>
-            <div class="form-group">
-                <input type="submit" value="إضافة" class="btn btn-primary" />
+            <div class="form-group row">
+                <input type="submit" value="إضافة" class="form-control form-control-lg btn btn-primary" id="colFormLabelLg">
             </div>
+            
         </form>
     </div>
 </div>
