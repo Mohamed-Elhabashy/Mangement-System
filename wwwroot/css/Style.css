@@ -1,4 +1,15 @@
-﻿p {
+﻿
+/* OTHERS */
+
+*:focus {
+    outline: none;
+}
+
+#icon {
+    width: 60%;
+}
+/*  ------ */
+p {
     float: right;
     font-size: 25px;
     font-weight: bold;
@@ -39,6 +50,9 @@ span {
 
 html {
     background-color: #56baed;
+    /*
+     direction: rtl;
+    */
 }
 
 body {
@@ -51,6 +65,7 @@ a {
     display: inline-block;
     text-decoration: none;
     font-weight: 400;
+    cursor: pointer;
 }
 
 h2 {
@@ -99,6 +114,7 @@ h2 {
     border-radius: 0 0 10px 10px;
 }
 
+/* Mari000 Classes */
 .regM{
     padding:20px 0px;
 }
@@ -106,6 +122,35 @@ h2 {
     margin:5px 0 20px 0;
 }
 
+.any-page-table{
+    margin: 30px 0;
+}
+.any-page-table .page-header{
+    padding: 8px 0px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+.any-page-table .page-header h3{
+    margin: 0;
+    color: #666;
+}
+
+.any-page-table table th,
+.any-page-table table td{
+    vertical-align: middle !important;
+}
+.any-page-table table .btn{
+    padding: .2rem .90rem;
+    color: #fff !important;
+    font-size: 1rem;
+}
+
+
+/* End Mari000*/
 
 /* TABS */
 
@@ -338,12 +383,3 @@ input[type=password]:focus {
 
 
 
-/* OTHERS */
-
-*:focus {
-    outline: none;
-}
-
-#icon {
-    width: 60%;
-}
