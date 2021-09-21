@@ -72,25 +72,11 @@ namespace Mangement_System.Controllers
 
         public ActionResult Delete(int id)
         {
-            var money = MoneyRepo.Find(id);
-            if (money == null) return RedirectToAction("Index", "Home");
-            return View(money);
+
+            MoneyRepo.delete(id);
+            return RedirectToAction(nameof(Index));
         }
 
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(Money money)
-        {
-            try
-            {
-                MoneyRepo.delete(money.MoneyId);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

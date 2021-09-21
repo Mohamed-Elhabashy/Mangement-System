@@ -3,51 +3,54 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<p>
-    <a style="text-decoration:none" asp-action="Create">إضافة</a>
-</p>
-<div class="table-responsive" id="Table">
-    <table class="table table-bordered table-striped th-center">
-        <thead>
-            <tr class="no-break">
-                <th width="3%">#</th>
-                <th>الاسم</th>
-                <th width="11%">المبلغ</th>
-                <th width="11%">التاريخ</th>
-                <th width="20%"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.Count() == 0)
-            {
-                <tr>
-                    <!-- if Not Result -->
-                    <td colspan="7"><b>لا يوجد بيانات</b></td>
+<section class="any-page-table">
+    <div class="page-header">
+        <a asp-action="Create" class="btn btn-secondary">إضافة</a>
+        <h3>الصادرات</h3>
+    </div>
+    <div class="table-responsive" id="Table">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="no-break">
+                    <th>#</th>
+                    <th>الاسم</th>
+                    <th>المبلغ</th>
+                    <th>التاريخ</th>
+                    <th>تحكم</th>
                 </tr>
-            }
-            @{int i = 1; }
-            @foreach (var item in Model)
-            {
+            </thead>
+            <tbody>
+                @if (Model.Count() == 0)
+                {
+                    <tr>
+                        <!-- if Not Result -->
+                        <td colspan="5"><b>لا يوجد بيانات</b></td>
+                    </tr>
+                }
+                @{int i = 1; }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="no-break">@i</td>
+                        <td>
+                            @item.MoneyName
+                        </td>
+                        <td>@item.TotalMoney</td>
+                        <td>@item.DateOfMoney.ToString("yyyy/MM/dd")</td>
 
-                <tr>
-                    <td class="no-break">@i</td>
-                    <td>
-                        @item.MoneyName
-                    </td>
-                    <td>@item.TotalMoney</td>
-                    <td>@item.DateOfMoney.ToString("yyyy/MM/dd")</td>
-                    
-                    <td>
-                        <a style="text-decoration:none" asp-action="Edit" asp-route-id="@item.MoneyId">تعديل</a>
-                        <br />
-                        <a style="text-decoration:none" asp-action="Delete" asp-route-id="@item.MoneyId">حذف</a>
-                    </td>
-                </tr>
-                i++;
-            }
+                        <td>
+                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.MoneyId">تعديل</a>
+                            <a class="btn btn-danger confirm" asp-action="Delete" asp-route-id="@item.MoneyId">حذف</a>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
 
-        </tbody>
-    </table>
-</div>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
