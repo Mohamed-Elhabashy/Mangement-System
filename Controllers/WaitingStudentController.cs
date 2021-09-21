@@ -83,31 +83,8 @@ namespace Mangement_System.Controllers
 
         public ActionResult Delete(int id)
         {
-            var student = students.Find(id);
-            return View(student);
-        }
-
-        // POST: WaitingStudentController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(Student student)
-        {
-            try
-            {
-                int? groupId = students.Find(student.studentId).GroupId;
-                students.delete(student.studentId);
-                if (groupId == null)
-                {
-                    //return to page Index that show all Waiting Student
-                    return RedirectToAction(nameof(Index));
-                }
-                //return to page Detials in Group that show all Student in this group
-                return RedirectToAction("Details","Group",new { id=groupId });
-            }
-            catch
-            {
-                return View();
-            }
+            students.delete(id);
+            return RedirectToAction("index");
         }
         public ActionResult AddToGroup(int id)
         {
