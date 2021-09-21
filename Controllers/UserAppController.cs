@@ -24,24 +24,9 @@ namespace Mangement_System.Controllers
         }
         public ActionResult Delete(string id)
         {
-            var item = Users.Find(id);
-            if(item==null) return RedirectToAction(nameof(Index));
-            return View(item);
+            Users.delete(id);
+            return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(string id, IFormCollection collection)
-        {
-            try
-            {
-                Users.delete(id);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

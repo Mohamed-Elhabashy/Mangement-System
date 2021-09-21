@@ -69,23 +69,10 @@ namespace Mangement_System.Controllers
 
         public ActionResult Delete(int id)
         {
-            var item = employee.Find(id);
-            return View(item);
+            employee.delete(id);
+            return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(Employee item)
-        {
-            try
-            {
-                employee.delete(item.EmployeeId);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }
