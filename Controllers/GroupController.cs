@@ -103,25 +103,11 @@ namespace Mangement_System.Controllers
         }
         public ActionResult Delete(int id)
         {
-            var group = groups.Find(id);
-            if (group == null) return RedirectToAction("Index", "Home");
-            return View(group);
+            groups.delete(id);
+            return RedirectToAction("index");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(Group group)
-        {
-            try
-            {
-                groups.delete(group.groupId);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
         public ActionResult payment(int id)
         {
             ViewBag.GroupId = id;
