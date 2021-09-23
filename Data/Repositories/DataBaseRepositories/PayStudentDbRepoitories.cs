@@ -46,7 +46,10 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         {
             return dbContext.payStudents.Include(p => p.student).Where(p => p.student.GroupId == groupid).ToList();
         }
-
+        public IList<PayStudent> ListAll()
+        {
+            return dbContext.payStudents.ToList();
+        }
         public void update(PayStudent item)
         {
             dbContext.payStudents.Update(item);

@@ -1,8 +1,34 @@
-﻿@{
+﻿@model Mangement_System.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container counter-section">
+    <div class="row">
+        <div class="col-md-6">
+            <p>الفلوس</p>
+            <br />
+            <p>@Model.TotalMoney</p>
+        </div>
+        <div class="col-md-6">
+            <p>عدد الطلاب على قائمه الانتظار</p>
+            <br />
+            <p>@Model.NumberWaitingStudent</p>
+        </div>
+        <div class="col-md-6">
+            <p>عدد الطلاب الملتحقين فى الكتاب</p>
+            <br />
+            <p>@Model.NumberStudent</p>
+        </div>
+        <div class="col-md-6">
+            <p>عدد المجاميع</p>
+            <br />
+            <p>@Model.NumberGroup</p>
+        </div>
+        <div class="col-md-6">
+            <p>عدد العاملين</p>
+            <br />
+            <p>@Model.Employee</p>
+        </div>
+    </div>
 </div>

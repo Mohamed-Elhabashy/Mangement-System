@@ -57,6 +57,21 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
                 .Where(s => s.GroupId == groupId).ToList();
             
         }
+        public int NumberOfStudent(bool group)
+        {
+
+            if (group == true)
+            {
+                return dbContext.students
+                 .Include(g => g.Group)
+                 .Where(s => s.GroupId != null).ToList().Count();
+            }
+            
+            return dbContext.students
+                 .Include(g => g.Group)
+                 .Where(s => s.GroupId == null).ToList().Count();
+
+        }
 
         public void update(Student student)
         {

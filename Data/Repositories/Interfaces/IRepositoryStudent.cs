@@ -13,6 +13,7 @@ namespace Mangement_System.Data.Repositories.Interfaces
         void update(T Entity);
         void delete(int id);
         IList<T> ListSpecificStudent(int? groupId);
+        int NumberOfStudent(bool group);
         void commit();
     }
 }

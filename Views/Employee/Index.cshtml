@@ -17,6 +17,16 @@
                     <th>الاسم</th>
                     <th>البلد</th>
                     <th>الوظيفه</th>
+                    <th>
+                        المؤهل الدراسي
+                    </th>
+                    <th>الهاتف</th>
+                    <th>
+                        الرقم القومي
+                    </th>
+                    <th>العنوان</th>
+                    <th>النوع</th>
+                    <th>الحالة الاجتماعية</th>
                     <th>المرتب</th>
                     <th>تاريخ الميلاد</th>
                     <th>تاريخ الالتحاق</th>
@@ -41,12 +51,17 @@
                         </td>
                         <td>@item.country</td>
                         <td>@item.Role</td>
+                        <td>@item.Areaofstudy</td>
+                        <td>@item.Phone</td>
+                        <td>@item.NationalId</td>
+                        <td>@item.Address</td>
+                        <td>@item.gender</td>
+                        <td>@item.Socialstatus</td>
                         <td>@item.Salary</td>
                         <td>@item.Birthdate.ToString("yyyy/MM/dd")</td>
                         <td>@item.JoinInStaff.ToString("yyyy/MM/dd")</td>
                         <td>
                             <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.EmployeeId">تعديل</a>
-                            
                             <a class="btn btn-danger confirm" asp-action="Delete" asp-route-id="@item.EmployeeId">حذف</a>
 
                         </td>
