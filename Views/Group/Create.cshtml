@@ -3,31 +3,37 @@
 @{
     ViewData["Title"] = "Create";
 }
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">اسم المجموعة</label>
-                <input asp-for="GroupName" class="form-control" />
-                <span asp-validation-for="GroupName" class="text-danger"></span>
+<section class="any-form">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="mb-5">إضافه مجموعه</h3>
+                    <form asp-action="Create">
+                        <div class="form-group">
+                            <input asp-for="GroupName" class="form-control" placeholder="اسم المجموعة" />
+                            <small asp-validation-for="GroupName" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="EmployeeId" class="form-control">
+                                <option value="">اختر المحفظ</option>
+                                @foreach (var item in Model.emplyee)
+                                {
+                                    <option value="@item.EmployeeId">@item.Name</option>
+                                }
+                            </select>
+                            <small asp-validation-for="EmployeeId" class="text-danger form-text text-right"></small>
+
+                        </div>
+                        <div class="form-group my-4">
+                            <button type="submit" class="btn btn-primary form-control">إضافة</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">المحفظ</label>
-                <select asp-for="EmployeeId" class="form-control input-lg">
-                    @foreach (var item in Model.emplyee)
-                    {
-                        <option value="@item.EmployeeId">@item.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="GroupName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</section>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
