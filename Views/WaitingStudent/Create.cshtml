@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="mb-5">أسم الفورم</h3>
-                    <form>
+                    <form asp-action="Create">
                         <div class="form-group">
                             <input asp-for="StudentName" class="form-control" placeholder="اسم الطالب" />
                             <small asp-validation-for="StudentName" class="text-danger form-text text-right"></small>

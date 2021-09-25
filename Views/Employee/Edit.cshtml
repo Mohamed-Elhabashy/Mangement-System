@@ -3,44 +3,80 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<section class="any-form">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="mb-5">تعديل موظف</h3>
+                    <form asp-action="Edit">
+                        <input type="hidden" asp-for="EmployeeId" />
+                        <input type="hidden" asp-for="JoinInStaff" />
+                        <div class="form-group">
+                            <input asp-for="Name" class="form-control" placeholder="الاسم" />
+                            <small asp-validation-for="Name" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="country" class="form-control" placeholder="البلد" />
+                            <small asp-validation-for="country" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="Role" class="form-control">
+                                <option value="">اختر الوظيفه</option>
+                                <option value="محفظ">محفظ</option>
+                                <option value="سكرتير">سكرتير</option>
+                                <option value="الدادا">الدادا</option>
+                                <option value="المشرف">المشرف</option>
+                            </select>
+                            <small asp-validation-for="EmployeeId" class="text-danger form-text text-right"></small>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="EmployeeId" />
-            <div class="form-group">
-                <label class="control-label">الاسم</label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Areaofstudy" class="form-control" placeholder="المؤهل الدراسي" />
+                            <small asp-validation-for="Areaofstudy" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Phone" class="form-control" placeholder="الهاتف" />
+                            <small asp-validation-for="Phone" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="NationalId" class="form-control" placeholder="الرقم القومي" />
+                            <small asp-validation-for="NationalId" class="text-danger form-text text-right"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="Address" class="form-control" placeholder="العنوان" />
+                            <small asp-validation-for="Address" class="text-danger form-text text-right"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="gender" class="form-control" placeholder="النوع" />
+                            <small asp-validation-for="gender" class="text-danger form-text text-right"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="Socialstatus" class="form-control" placeholder="الحالة الاجتماعية" />
+                            <small asp-validation-for="Socialstatus" class="text-danger form-text text-right"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="Salary" class="form-control" placeholder="المرتب" />
+                            <small asp-validation-for="Salary" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Birthdate" class="form-control" placeholder="تاريخ الميلاد" />
+                            <small asp-validation-for="Birthdate" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group my-4">
+                            <button type="submit" class="btn btn-primary form-control">تعديل</button>
+                        </div>
+
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">البلد</label>
-                <input asp-for="country" class="form-control" />
-                <span asp-validation-for="country" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">الوظيفة</label>
-                <input asp-for="Role" class="form-control" />
-                <span asp-validation-for="Role" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">المرتب</label>
-                <input asp-for="Salary" class="form-control" />
-                <span asp-validation-for="Salary" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">تاريخ الميلاد</label>
-                <input asp-for="Birthdate" class="form-control" />
-                <span asp-validation-for="Birthdate" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" value="تعديل" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</section>
 
 
 @section Scripts {
