@@ -78,5 +78,13 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
             dbContext.students.Update(student);
             commit();
         }
+        public IList<Student> Search(string name, DateTime begin, DateTime end)
+        {  
+             return dbContext.students.Where(item =>
+                   item.StudentName.Contains(name)
+                   && item.Birthdate>=begin
+                   && item.Birthdate <= end
+                ).ToList();
+        }
     }
 }

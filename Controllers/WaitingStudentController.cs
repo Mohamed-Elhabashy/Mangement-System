@@ -115,6 +115,11 @@ namespace Mangement_System.Controllers
                 return View();
             }
         }
+        public ActionResult Search(string name, DateTime begin, DateTime end)
+        {
+            var list = students.Search(name, begin, end);
+            return View("Index", list);
+        }
         public static string ConvertNumerals(string input)
         {
            

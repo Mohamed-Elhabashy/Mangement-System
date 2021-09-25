@@ -15,5 +15,6 @@ namespace Mangement_System.Data.Repositories.Interfaces
         IList<T> ListSpecificStudent(int? groupId);
         int NumberOfStudent(bool group);
         void commit();
+        IList<T> Search(string name, DateTime begin, DateTime end);
     }
 }

@@ -18,15 +18,16 @@
                 </button>
                 <div class="container">
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        <a class="navbar-brand" href="#">كتابى</a>
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Index">المختار</a>
                         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
-                            <li class="nav-item active">
-                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" asp-controller="UserApp" asp-action="Index">المستخدمين <span class="sr-only">(current)</span></a>
-                            </li>
+
+                            @if (User.IsInRole("admin"))
+                            {
+                                <li class="nav-item active">
+                                    <a class="nav-link" asp-controller="UserApp" asp-action="Index">المستخدمين <span class="sr-only">(current)</span></a>
+                                </li>
+                            }
                             <li class="nav-item active">
                                 <a class="nav-link" asp-controller="Donation" asp-action="Index">التبرعات <span class="sr-only">(current)</span></a>
                             </li>
@@ -45,7 +46,9 @@
                             <li class="nav-item active">
                                 <a class="nav-link" asp-controller="WaitingStudent" asp-action="Index">قوائم الأنتظار <span class="sr-only">(current)</span></a>
                             </li>
-
+                            <li class="nav-item active">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">الصفحة الرئيسية <span class="sr-only">(current)</span></a>
+                            </li>
 
                         </ul>
                         <partial name="_LoginPartial" />

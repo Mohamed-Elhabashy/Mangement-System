@@ -4,45 +4,46 @@
     ViewData["Title"] = "Edit";
 }
 
+<section class="any-form">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="mb-5">تعديل</h3>
+                    <form asp-action="Edit">
+                        <input type="hidden" asp-for="studentId" />
+                        <input type="hidden" asp-for="GroupId" />
+                        <input type="hidden" asp-for="Joinplace" />
+                        <div class="form-group">
+                            <input asp-for="StudentName" class="form-control" placeholder="اسم الطالب" />
+                            <small asp-validation-for="StudentName" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="school" class="form-control" placeholder="المدرسة" />
+                            <small asp-validation-for="school" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="phone" class="form-control" placeholder="رقم الوالد" />
+                            <small asp-validation-for="phone" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="FatherJob" class="form-control" placeholder="وظيفة الوالد" />
+                            <small asp-validation-for="FatherJob" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Birthdate" class="form-control" placeholder="تاريخ الميلاد" />
+                            <small asp-validation-for="Birthdate" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group my-4">
+                            <button type="submit" class="btn btn-primary form-control">تعديل</button>
+                        </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="studentId" />
-            <input type="hidden" asp-for="GroupId" />
-            <input type="hidden" asp-for="Joinplace" />
-            <div class="form-group">
-                <label class="control-label">اسم الطالب</label>
-                <input asp-for="StudentName" class="form-control" />
-                <span asp-validation-for="StudentName" class="text-danger"></span>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">المدرسة</label>
-                <input asp-for="school" class="form-control" />
-                <span asp-validation-for="school" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">رقم الوالد</label>
-                <input asp-for="phone" class="form-control" />
-                <span asp-validation-for="phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">وظيفة الوالد</label>
-                <input asp-for="FatherJob" class="form-control" />
-                <span asp-validation-for="FatherJob" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">تاريخ الميلاد</label>
-                <input asp-for="Birthdate" class="form-control" />
-                <span asp-validation-for="Birthdate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</section>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -1,6 +1,7 @@
 ﻿using Mangement_System.Data.Models;
 using Mangement_System.Data.Repositories.Interfaces;
 using Mangement_System.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Mangement_System.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class UserAppController : Controller
     {
         readonly private IRepositoryUser<User> Users;

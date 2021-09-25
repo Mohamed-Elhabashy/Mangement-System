@@ -6,7 +6,10 @@
 
 <section class="any-page-table">
     <div class="page-header">
-        <a asp-action="Create" class="btn btn-secondary">إضافة موظف</a>
+        @if (User.IsInRole("admin"))
+        {
+            <a asp-action="Create" class="btn btn-secondary">إضافة موظف</a>
+        }
         <h3>الموظفين</h3>
     </div>
     <div class="table-responsive" id="Table">
@@ -30,8 +33,11 @@
                     <th>المرتب</th>
                     <th>تاريخ الميلاد</th>
                     <th>تاريخ الالتحاق</th>
-                    <th>تحكم</th>
-                </tr>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <th>تحكم</th>
+                    }
+                    </tr>
             </thead>
             <tbody>
                 @if (Model.Count() == 0)
@@ -60,11 +66,14 @@
                         <td>@item.Salary</td>
                         <td>@item.Birthdate.ToString("yyyy/MM/dd")</td>
                         <td>@item.JoinInStaff.ToString("yyyy/MM/dd")</td>
-                        <td>
-                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.EmployeeId">تعديل</a>
-                            <a class="btn btn-danger confirm" asp-action="Delete" asp-route-id="@item.EmployeeId">حذف</a>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <td>
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.EmployeeId">تعديل</a>
+                                <a class="btn btn-danger confirm" asp-action="Delete" asp-route-id="@item.EmployeeId">حذف</a>
 
-                        </td>
+                            </td>
+                        }
                     </tr>
                     i++;
                 }

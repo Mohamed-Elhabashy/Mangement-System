@@ -24,12 +24,12 @@ namespace Mangement_System.Controllers
             return View(list);
         }
 
-        
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Employee item)
@@ -45,13 +45,13 @@ namespace Mangement_System.Controllers
                 return View();
             }
         }
-
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {
             var item = employee.Find(id);
             return View(item);
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Employee item)
@@ -66,7 +66,7 @@ namespace Mangement_System.Controllers
                 return View();
             }
         }
-
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
             employee.delete(id);
