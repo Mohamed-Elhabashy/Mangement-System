@@ -15,13 +15,11 @@ namespace Mangement_System.Controllers
     public class GroupController : Controller
     {
         readonly private IRepository<Group> groups;
-        readonly private IRepositoryPayStudent<PayStudent> paystudentRepo;
         readonly private IRepository<Employee> EmployeeRepo;
-        public GroupController(IRepository<Group> _groups, IRepository<Employee> _EmployeeRepo, IRepositoryPayStudent<PayStudent> _paystudentRepo)
+        public GroupController(IRepository<Group> _groups, IRepository<Employee> _EmployeeRepo)
         {
             groups = _groups;
             EmployeeRepo = _EmployeeRepo;
-            paystudentRepo = _paystudentRepo;
         }
         public ActionResult Index()
         {
@@ -108,79 +106,79 @@ namespace Mangement_System.Controllers
         }
 
        
-        public ActionResult payment(int id)
-        {
-            ViewBag.GroupId = id;
-            var list = paystudentRepo.List(id);
-            return View(list);
-        }
-        public ActionResult paystudent(int id)
-        {
-            var model = new PayStudentViewModel {
-                students = groups.Find(id).Students,
-                groupId=id
-            };
-            return View(model);
-        }
-        [HttpPost]
-        public ActionResult paystudent(PayStudentViewModel model)
-        {
-            try
-            {
-                var item = new PayStudent
-                {
-                    TotalPay = model.TotalPay,
-                    StudentId = model.StudentId,
-                    date = DateTime.Now
-                };
-                paystudentRepo.Add(item);
+        //public ActionResult payment(int id)
+        //{
+        //    ViewBag.GroupId = id;
+        //    var list = paystudentRepo.List(id);
+        //    return View(list);
+        //}
+        //public ActionResult paystudent(int id)
+        //{
+        //    var model = new PayStudentViewModel {
+        //        students = groups.Find(id).Students,
+        //        groupId=id
+        //    };
+        //    return View(model);
+        //}
+        //[HttpPost]
+        //public ActionResult paystudent(PayStudentViewModel model)
+        //{
+        //    try
+        //    {
+        //        var item = new PayStudent
+        //        {
+        //            TotalPay = model.TotalPay,
+        //            StudentId = model.StudentId,
+        //            date = DateTime.Now
+        //        };
+        //        paystudentRepo.Add(item);
 
-                return RedirectToAction("payment",new {id=model.groupId });
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        public ActionResult DeletePayStudent(int id,int groupId)
-        {
-            var model = paystudentRepo.Find(id);
-            if (model == null) return RedirectToAction("payment", new { id = groupId });
-            return View(model);
-        }
+        //        return RedirectToAction("payment",new {id=model.groupId });
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+        //public ActionResult DeletePayStudent(int id,int groupId)
+        //{
+        //    var model = paystudentRepo.Find(id);
+        //    if (model == null) return RedirectToAction("payment", new { id = groupId });
+        //    return View(model);
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeletePayStudent(int paystudentId, int groupId, IFormCollection collection)
-        {
-            try
-            {
-                paystudentRepo.delete(paystudentId);
-                return RedirectToAction("payment", new { id = groupId });
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        public ActionResult EditPayStudent(int id, int groupId)
-        {
-            var item = paystudentRepo.Find(id);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeletePayStudent(int paystudentId, int groupId, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        paystudentRepo.delete(paystudentId);
+        //        return RedirectToAction("payment", new { id = groupId });
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+        //public ActionResult EditPayStudent(int id, int groupId)
+        //{
+        //    var item = paystudentRepo.Find(id);
 
-            if (item == null) return RedirectToAction("payment", new { id = groupId });
+        //    if (item == null) return RedirectToAction("payment", new { id = groupId });
 
-            return View(item);
-        }
+        //    return View(item);
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditPayStudent(PayStudent model)
-        {
-                model.student = null;
-                paystudentRepo.update(model);
-                return RedirectToAction("payment", new { id = 1 });
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EditPayStudent(PayStudent model)
+        //{
+        //        model.student = null;
+        //        paystudentRepo.update(model);
+        //        return RedirectToAction("payment", new { id = 1 });
             
             
-        }
+        //}
     }
 }

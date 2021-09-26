@@ -1,0 +1,36 @@
+﻿@model Mangement_System.Data.Models.PayStudent
+
+@{
+    ViewData["Title"] = "AddPayment";
+}
+<section class="any-form">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="mb-5">دفع</h3>
+                    <form asp-action="AddPayment" method="post">
+                        <input type="hidden" asp-for="StudentId" value="@ViewBag.StudentId"/>
+                        <div class="form-group">
+                            <input asp-for="TotalPay" class="form-control" placeholder="المبلغ" />
+                            <small asp-validation-for="TotalPay" class="text-danger form-text text-right"></small>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="date" class="form-control" placeholder="تاريخ الميلاد" />
+                            <small asp-validation-for="date" class="text-danger form-text text-right"></small>
+                        </div>
+
+                        <div class="form-group my-4">
+                            <button type="submit" class="btn btn-primary form-control">إضافة</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

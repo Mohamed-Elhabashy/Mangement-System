@@ -1,0 +1,69 @@
+﻿@model Mangement_System.ViewModels.payment.PaymentViewModel
+
+@{
+    ViewData["Title"] = "ListGroups";
+}
+<div class="panel-body">
+    <form class="form-horizontal" asp-action="SelectGroup">
+
+        <div class="form-group">
+            <label class="control-label">المجموعة</label>
+            <select name="GroupId" class="form-control">
+                <option value=""></option>
+                @foreach (var item in Model.groups)
+                {
+                    <option value="@item.groupId">@item.GroupName</option>
+                }
+            </select>
+            <div class="form-group my-4">
+                <button type="submit" class="btn btn-primary form-control">إضافة</button>
+            </div>
+        </div>
+    </form>
+</div>
+@if (Model.students != null)
+{
+    <section class="any-page-table">
+        <div class="page-header">
+            <h3>الطلاب</h3>
+        </div>
+        <div class="table-responsive" id="Table">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr class="no-break">
+                        <th>#</th>
+                        <th>اسم الطالب</th>
+                        <th>تحكم</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.students.Count() == 0)
+                    {
+                        <tr>
+                            <!-- if Not Result -->
+                            <td colspan="3"><b>لا يوجد بيانات</b></td>
+                        </tr>
+                    }
+                    @{int i = 1; }
+                    @foreach (var item in Model.students)
+                    {
+
+
+
+                        <tr>
+                            <td class="no-break">@i</td>
+                            <td>
+                                @item.StudentName
+                            </td>
+                            <td>
+                                <a class="btn btn-info" asp-action="AddPayment" asp-route-studentid="@item.studentId">دفع</a>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+}

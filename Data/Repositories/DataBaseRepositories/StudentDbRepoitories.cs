@@ -49,7 +49,7 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
                 .ToList();
         }
 
-        public IList<Student> ListSpecificStudent(int? groupId)
+        public List<Student> ListSpecificStudent(int? groupId)
         {
             
            return dbContext.students
@@ -78,12 +78,18 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
             dbContext.students.Update(student);
             commit();
         }
-        public IList<Student> Search(string name, DateTime begin, DateTime end)
-        {  
-             return dbContext.students.Where(item =>
+        public IList<Student> Search(string name, int? year)
+        {
+            if (name == null) name = "";
+            if (year == null)
+            {
+                return dbContext.students.Where(item =>
+                       item.StudentName.Contains(name)
+                    ).ToList();
+            }
+            return dbContext.students.Where(item =>
                    item.StudentName.Contains(name)
-                   && item.Birthdate>=begin
-                   && item.Birthdate <= end
+                   && item.Birthdate.Year==year
                 ).ToList();
         }
     }

@@ -38,7 +38,7 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         public PayStudent Find(int id)
         {
             return dbContext.payStudents.
-                Include(p=>p.student).
+                Include(p => p.student).
                 FirstOrDefault(p => p.PayStudentId == id);
         }
 
@@ -48,12 +48,20 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         }
         public IList<PayStudent> ListAll()
         {
-            return dbContext.payStudents.ToList();
+            return dbContext.payStudents.Include(p => p.student).ThenInclude(g=>g.Group).OrderByDescending(p => p.PayStudentId).ToList();
         }
+
+        public IList<PayStudent> Search(string name)
+        {
+            if (name == null) name = "";
+            return dbContext.payStudents.Include(s => s.student).Where(item => item.student.StudentName.Contains(name)).ToList();
+        }
+        
         public void update(PayStudent item)
         {
             dbContext.payStudents.Update(item);
             commit();
         }
+        
     }
 }

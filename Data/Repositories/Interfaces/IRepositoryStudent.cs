@@ -12,9 +12,9 @@ namespace Mangement_System.Data.Repositories.Interfaces
         T Find(int id);
         void update(T Entity);
         void delete(int id);
-        IList<T> ListSpecificStudent(int? groupId);
+        List<T> ListSpecificStudent(int? groupId);
         int NumberOfStudent(bool group);
         void commit();
-        IList<T> Search(string name, DateTime begin, DateTime end);
+        IList<T> Search(string name, int? year);
     }
 }

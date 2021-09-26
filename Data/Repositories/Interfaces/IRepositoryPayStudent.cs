@@ -15,5 +15,6 @@ namespace Mangement_System.Data.Repositories.Interfaces
         void delete(int id);
         IList<PayStudent> ListAll();
         void commit();
+        IList<T> Search(string name);
     }
 }

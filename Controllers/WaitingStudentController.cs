@@ -2,14 +2,10 @@
 using Mangement_System.Data.Repositories.Interfaces;
 using Mangement_System.ViewModels.Student;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
+using X.PagedList;
 namespace Mangement_System.Controllers
 {
     [Authorize]
@@ -22,9 +18,15 @@ namespace Mangement_System.Controllers
             students = _students;
             groups = _groups;
         }
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var list = students.ListSpecificStudent(null);
+            int pagenumber = page ?? 1;
+            ViewBag.function = "Index";
+            var model = students.ListSpecificStudent(null);
+            ViewBag.TotalPageProblem = (model.Count() / 25) + (model.Count() % 25 == 0 ? 0 : 1);
+            if (pagenumber < 0 || pagenumber > ViewBag.TotalPageProblem) pagenumber = 1;
+            ViewBag.Pagenum = pagenumber;
+            var list = model.ToPagedList(pagenumber, 25);
             return View(list);
         }
 
@@ -83,8 +85,18 @@ namespace Mangement_System.Controllers
 
         public ActionResult Delete(int id)
         {
+            var student = students.Find(id);
+            if (student == null) return Redirect("Index");
+            int? groupId = student.GroupId;
             students.delete(id);
-            return RedirectToAction("index");
+            if (groupId == null)
+            {
+                //return to page Index that show all Waiting Student
+                return RedirectToAction(nameof(Index));
+            }
+            //return to page Detials in Group that show all Student in this group
+            return RedirectToAction("Details", "Group", new { id = groupId });
+            
         }
         public ActionResult AddToGroup(int id)
         {
@@ -115,9 +127,15 @@ namespace Mangement_System.Controllers
                 return View();
             }
         }
-        public ActionResult Search(string name, DateTime begin, DateTime end)
+        public ActionResult Filter(int? page ,string Name, int? year )
         {
-            var list = students.Search(name, begin, end);
+            int pagenumber = page ?? 1;
+            ViewBag.function = "Filter";
+            var model = students.Search(Name, year);
+            ViewBag.TotalPageProblem = (model.Count() / 25) + (model.Count() % 25 == 0 ? 0 : 1);
+            if (pagenumber < 0 || pagenumber > ViewBag.TotalPageProblem) pagenumber = 1;
+            ViewBag.Pagenum = pagenumber;
+            var list = model.ToPagedList(pagenumber, 25);
             return View("Index", list);
         }
         public static string ConvertNumerals(string input)

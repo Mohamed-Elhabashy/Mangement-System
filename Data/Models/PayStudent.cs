@@ -11,6 +11,7 @@ namespace Mangement_System.Data.Models
         public int PayStudentId { get; set; }
         public float TotalPay { get; set; }
         public DateTime date { get; set; }
+        public DateTime DateOfPay { get; set; }
         public int StudentId { get; set; }
         public Student student { get; set; }
     }

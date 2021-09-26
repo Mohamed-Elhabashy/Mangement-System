@@ -6,7 +6,7 @@
 
 <section class="any-page-table">
     <div class="page-header">
-        @if (User.IsInRole("admin"))
+        @if (User.IsInRole("Admin"))
         {
             <a asp-action="Create" class="btn btn-secondary">إضافة موظف</a>
         }
@@ -33,7 +33,7 @@
                     <th>المرتب</th>
                     <th>تاريخ الميلاد</th>
                     <th>تاريخ الالتحاق</th>
-                    @if (User.IsInRole("admin"))
+                    @if (User.IsInRole("Admin"))
                     {
                         <th>تحكم</th>
                     }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Mangement_System.Data.Models.Student>
+﻿@model IEnumerable<Mangement_System.Data.Models.PayStudent>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,11 +11,6 @@
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-md-8">
-                <input type="text" name="year" class="form-control" placeholder="السنة" />
-            </div>
-        </div>
-        <div class="form-group row">
             <div class="col-md-offset-2 col-md-8">
                 <input type="reset" value="Reset" class="btn btn-secondary" />
                 <input type="submit" value="Search" class="btn btn-primary" />
@@ -25,8 +20,8 @@
 </div>
 <section class="any-page-table">
     <div class="page-header">
-        <a asp-action="Create" class="btn btn-secondary">إضافة طالب</a>
-        <h3>الطلاب</h3>
+        <a asp-action="ListGroups" class="btn btn-secondary">إضافة</a>
+        <h3>الأشتراكات</h3>
     </div>
     <div class="table-responsive" id="Table">
         <table class="table table-bordered table-striped">
@@ -34,11 +29,10 @@
                 <tr class="no-break">
                     <th>#</th>
                     <th>اسم الطالب</th>
-                    <th>المدرسة</th>
-                    <th>رقم الوالد</th>
-                    <th>وظيفة الأب</th>
-                    <th>تاريخ الميلاد</th>
-                    <th>تاريخ التقديم</th>
+                    <th>المجموعة</th>
+                    <th>المبلغ</th>
+                    <th>تاريخ الدفع</th>
+                    <th>تاريخ العملية</th>
                     <th>تحكم</th>
                 </tr>
             </thead>
@@ -47,39 +41,25 @@
                 {
                     <tr>
                         <!-- if Not Result -->
-                        <td colspan="8"><b>لا يوجد بيانات</b></td>
+                        <td colspan="6"><b>لا يوجد بيانات</b></td>
                     </tr>
                 }
                 @{int i = 1; }
                 @foreach (var item in Model)
                 {
 
-                    string datearabic = item.Joinplace.ToString("yyyy/MM/dd").Replace('0', '\u06f0')
-                        .Replace('1', '\u06f1')
-                        .Replace('2', '\u06f2')
-                        .Replace('3', '\u06f3')
-                        .Replace('4', '\u06f4')
-                        .Replace('5', '\u06f5')
-                        .Replace('6', '\u06f6')
-                        .Replace('7', '\u06f7')
-                        .Replace('8', '\u06f8')
-                        .Replace('9', '\u06f9');
-
                     <tr>
                         <td class="no-break">@i</td>
                         <td>
-                            @item.StudentName
+                            @item.student.StudentName
                         </td>
-                        <td>@item.school</td>
-                        <td>@item.phone</td>
-                        <td>@item.FatherJob</td>
-                        <td>@item.Birthdate.ToString("yyyy/MM/dd")</td>
-                        <td>@datearabic</td>
+                        <td>@item.student.Group.GroupName</td>
+                        <td>@item.TotalPay</td>
+                        <td>@item.date</td>
+                        <td>@item.DateOfPay</td>
                         <td>
-                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.studentId">تعديل</a>
-                            <a class="btn btn-danger confirm" asp-action="Delete" asp-route-id="@item.studentId">حذف</a>
-
-                            <a class="btn btn-info" asp-action="AddToGroup" asp-route-id="@item.studentId">إضافة لجروب</a>
+                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.PayStudentId">تعديل</a>
+                            <a class="btn btn-danger confirm" asp-action="Delete" asp-route-id="@item.PayStudentId">حذف</a>
                         </td>
                     </tr>
                     i++;
@@ -116,7 +96,7 @@
                 {
                     if (ViewBag.function == "Filter")
                     {
-                        <li class="@(ViewBag.Pagenum==j?"active":"")"><a asp-action="Filter" asp-route-page="@j" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year" >@j</a></li>
+                        <li class="@(ViewBag.Pagenum==j?"active":"")"><a asp-action="Filter" asp-route-page="@j" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year">@j</a></li>
                     }
                     else
                     {
@@ -130,7 +110,7 @@
                     @if (ViewBag.function == "Filter")
                     {
                         <li>
-                            <a asp-action="Filter" asp-route-page="@(ViewBag.Pagenum+1)" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year"  aria-label="Next">
+                            <a asp-action="Filter" asp-route-page="@(ViewBag.Pagenum+1)" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
