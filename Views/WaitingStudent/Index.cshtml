@@ -3,30 +3,23 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="panel-body">
-    <form class="form-horizontal" asp-action="Filter" method="POST">
-        <div class="form-group row">
-            <div class="col-md-8">
-                <input type="text" name="Name" class="form-control" placeholder="الاسم" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-8">
-                <input type="text" name="year" class="form-control" placeholder="السنة" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-offset-2 col-md-8">
-                <input type="reset" value="Reset" class="btn btn-secondary" />
-                <input type="submit" value="Search" class="btn btn-primary" />
-            </div>
-        </div>
-    </form>
-</div>
+
 <section class="any-page-table">
     <div class="page-header">
         <a asp-action="Create" class="btn btn-secondary">إضافة طالب</a>
-        <h3>الطلاب</h3>
+        <form asp-action="Filter" method="POST">
+            <div class="form-row">
+                <div class="col-6">
+                    <input class="form-control" name="Name" placeholder="الاسم">
+                </div>
+                <div class="col">
+                    <input class="form-control" name="year" placeholder="السنة">
+                </div>
+                <div class="col">
+                    <button class="form-control btn-info">بحث</button>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="table-responsive" id="Table">
         <table class="table table-bordered table-striped">
@@ -54,17 +47,6 @@
                 @foreach (var item in Model)
                 {
 
-                    string datearabic = item.Joinplace.ToString("yyyy/MM/dd").Replace('0', '\u06f0')
-                        .Replace('1', '\u06f1')
-                        .Replace('2', '\u06f2')
-                        .Replace('3', '\u06f3')
-                        .Replace('4', '\u06f4')
-                        .Replace('5', '\u06f5')
-                        .Replace('6', '\u06f6')
-                        .Replace('7', '\u06f7')
-                        .Replace('8', '\u06f8')
-                        .Replace('9', '\u06f9');
-
                     <tr>
                         <td class="no-break">@i</td>
                         <td>
@@ -74,8 +56,8 @@
                         <td>@item.phone</td>
                         <td>@item.FatherJob</td>
                         <td>@item.Birthdate.ToString("yyyy/MM/dd")</td>
-                        <td>@datearabic</td>
-                        <td>
+                        <td>@item.Joinplace.ToString("yyyy/MM/dd")</td>
+                        <td class="td-btn-table">
                             <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.studentId">تعديل</a>
                             <a class="btn btn-danger confirm" asp-action="Delete" asp-route-id="@item.studentId">حذف</a>
 
@@ -88,68 +70,70 @@
             </tbody>
         </table>
     </div>
-    <div aria-label="Page navigation" class="text-center">
-        <ul class="pagination pagination-lg">
-            @{
-                if (ViewBag.Pagenum > 1)
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @if (ViewBag.Pagenum > 1)
+            {
+
+                @if (ViewBag.function == "Filter")
                 {
-
-                    @if (ViewBag.function == "Filter")
-                    {
-                        <li>
-                            <a asp-action="Filter" asp-route-page="@(ViewBag.Pagenum-1)" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                            <a asp-action="Index" asp-route-page="@(ViewBag.Pagenum-1)" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                    }
-
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Filter" asp-route-page="@(ViewBag.Pagenum-1)" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year" aria-label="السابق">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">السابق</span>
+                        </a>
+                    </li>
                 }
-                for (int j = 1; j <= ViewBag.TotalPageProblem; j++)
+                else
                 {
-                    if (ViewBag.function == "Filter")
-                    {
-                        <li class="@(ViewBag.Pagenum==j?"active":"")"><a asp-action="Filter" asp-route-page="@j" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year" >@j</a></li>
-                    }
-                    else
-                    {
-                        <li class="@(ViewBag.Pagenum==j?"active":"")"><a asp-action="Index" asp-route-page="@j">@j</a></li>
-                    }
-
-                }
-                if (ViewBag.Pagenum < ViewBag.TotalPageProblem)
-                {
-
-                    @if (ViewBag.function == "Filter")
-                    {
-                        <li>
-                            <a asp-action="Filter" asp-route-page="@(ViewBag.Pagenum+1)" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year"  aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                            <a asp-action="Index" asp-route-page="@(ViewBag.Pagenum+1)" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    }
-
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.Pagenum-1)" aria-label="السابق">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">السابق</span>
+                        </a>
+                    </li>
                 }
 
             }
+            @for (int j = 1; j <= ViewBag.TotalPageProblem; j++)
+            {
+                if (ViewBag.function == "Filter")
+                {
+                    <li class="@(ViewBag.Pagenum==j?"page-item active":"")"><a class="page-link" asp-action="Filter" asp-route-page="@j" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year">@j</a></li>
+                }
+                else
+                {
+                    <li class="@(ViewBag.Pagenum==j?"page-item active":"")"><a class="page-link" asp-action="Index" asp-route-page="@j">@j</a></li>
+                }
 
+            }
+            @if (ViewBag.Pagenum < ViewBag.TotalPageProblem)
+            {
+
+                @if (ViewBag.function == "Filter")
+                {
+
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Filter" asp-route-page="@(ViewBag.Pagenum+1)" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year" aria-label="التالى">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">التالى</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.Pagenum+1)" aria-label="التالى">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">التالى</span>
+                        </a>
+                    </li>
+                }
+
+            }
         </ul>
-    </div>
+    </nav>
 </section>
 
 

@@ -49,19 +49,15 @@ span {
 /* BASIC */
 
 html {
-    background-color: #56baed;
-    /*
-     direction: rtl;
-    */
+    
 }
 
 body {
     font-family: "Poppins", sans-serif;
-    height: 100vh;
 }
 
-a {
-    color: #92badd;
+a ,a:hover, a:focus{
+    
     display: inline-block;
     text-decoration: none;
     font-weight: 400;
@@ -142,13 +138,16 @@ h2 {
 .any-page-table table th,
 .any-page-table table td{
     vertical-align: middle !important;
+    font-size:20px;
 }
 .any-page-table table .btn{
     padding: .2rem .90rem;
     color: #fff !important;
     font-size: 1rem;
 }
-
+.any-page-table table .td-btn-table {
+    margin-bottom:2px;    
+}
 
 /* End Mari000*/
 
@@ -167,7 +166,7 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-input[type=button], input[type=submit], input[type=reset] {
+.login input[type=button], .login input[type=submit], .login input[type=reset] {
     background-color: #56baed;
     border: none;
     color: white;
@@ -188,11 +187,15 @@ input[type=button], input[type=submit], input[type=reset] {
     transition: all 0.3s ease-in-out;
 }
 
-input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+.login input[type=button]:hover, 
+.login input[type=submit]:hover,
+.login input[type=reset]:hover {
     background-color: #39ace7;
 }
 
-input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
+.login input[type=button]:active,
+    .login input[type=submit]:active,
+    .login input[type=reset]:active {
     -moz-transform: scale(0.95);
     -webkit-transform: scale(0.95);
     -o-transform: scale(0.95);
@@ -200,7 +203,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
     transform: scale(0.95);
 }
 
-input[type=text] {
+.login input[type=text] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -220,13 +223,13 @@ input[type=text] {
     border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus {
+.login input[type=text]:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
 }
 
 
-input[type=password] {
+.login input[type=password] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -246,12 +249,12 @@ input[type=password] {
     border-radius: 5px 5px 5px 5px;
 }
 
-input[type=password]:focus {
+.login input[type=password]:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
 }
 
-
+   
 
 /* ANIMATIONS */
 
@@ -399,4 +402,8 @@ input[type=password]:focus {
 }
 
 /* End Forms */
-
+/* Start direction page */
+.arabic-page{
+    direction:rtl !important;
+}
+/* End direction page */

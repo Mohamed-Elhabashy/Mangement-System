@@ -11,32 +11,39 @@
                     <h3 class="mb-5">إضافة لجروب</h3>
                     <form asp-action="AddToGroup" method="post">
                         <div class="form-group">
+                            <label class="control-label">اسم الطالب</label>
                             <input readonly value="@Model.student.StudentName" class="form-control" />
                             <small asp-validation-for="student.StudentName" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group">
-                            <input readonly value="@Model.student.school" class="form-control" placeholder="المبلغ" />
+                            <label class="control-label">المدرسة</label>
+                            <input readonly value="@Model.student.school" class="form-control" />
                             <small asp-validation-for="student.school" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group">
-                            <input readonly value="@Model.student.phone" class="form-control" placeholder="المبلغ" />
+                            <label class="control-label">رقم الوالد	</label>
+                            <input readonly value="@Model.student.phone" class="form-control" />
                             <small asp-validation-for="student.phone" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group">
-                            <input readonly value="@Model.student.FatherJob" class="form-control" placeholder="المبلغ" />
+                            <label class="control-label">وظيفة الأب	</label>
+                            <input readonly value="@Model.student.FatherJob" class="form-control" />
                             <small asp-validation-for="student.FatherJob" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group">
-                            <input readonly value="@Model.student.Birthdate.ToString("yyyy/MM/dd")" class="form-control" placeholder="المبلغ" />
+                            <label class="control-label">تاريخ الميلاد</label>
+                            <input readonly value="@Model.student.Birthdate.ToString("yyyy/MM/dd")" class="form-control" />
                             <small asp-validation-for="student.Birthdate" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group">
+                            <label class="control-label">اسم الطالب</label>
                             <input readonly value="@Model.student.Joinplace.ToString("yyyy/MM/dd")" class="form-control" placeholder="المبلغ" />
                             <small asp-validation-for="student.Joinplace" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group">
                             <label class="control-label">المجموعة</label>
                             <select name="GroupId" class="form-control">
+                                <option value=""></option>
                                 @foreach (var item in Model.Listgroup)
                                 {
                                     if (Model.student.GroupId == item.groupId)

@@ -110,7 +110,7 @@ namespace Mangement_System.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult AddToGroup(int StudentId,int GroupId)
+        public ActionResult AddToGroup(int StudentId,int? GroupId)
         {
             try
             {

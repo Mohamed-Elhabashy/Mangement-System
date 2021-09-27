@@ -101,11 +101,24 @@ namespace Mangement_System.Controllers
         }
         public ActionResult Delete(int id)
         {
-            groups.delete(id);
-            return RedirectToAction("index");
+            try
+            {
+                var group = groups.Find(id);
+                if(group.Students.ToList().Count()>0)
+                    return RedirectToAction("CannotDelete");
+                groups.delete(id);
+                return RedirectToAction("index");
+            }
+            catch
+            {
+                return RedirectToAction("CannotDelete");
+            }
+        } 
+        public ActionResult CannotDelete()
+        {
+            return View();
         }
 
-       
         //public ActionResult payment(int id)
         //{
         //    ViewBag.GroupId = id;
@@ -177,8 +190,8 @@ namespace Mangement_System.Controllers
         //        model.student = null;
         //        paystudentRepo.update(model);
         //        return RedirectToAction("payment", new { id = 1 });
-            
-            
+
+
         //}
     }
 }

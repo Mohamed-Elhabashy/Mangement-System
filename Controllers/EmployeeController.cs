@@ -58,6 +58,9 @@ namespace Mangement_System.Controllers
         {
             try
             {
+                var emp = employee.Find(item.EmployeeId);
+                if(emp.Role == "محفظ" && item.Role!= "محفظ")
+                    return RedirectToAction("Cannot");
                 employee.update(item);
                 return RedirectToAction(nameof(Index));
             }
@@ -69,10 +72,14 @@ namespace Mangement_System.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            employee.delete(id);
-            return RedirectToAction(nameof(Index));
+            if (employee.delete(id) == true)
+                return RedirectToAction(nameof(Index));
+            return RedirectToAction("Cannot");
+        }
+        public ActionResult Cannot()
+        {
+            return View();
         }
 
-        
     }
 }

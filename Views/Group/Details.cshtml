@@ -6,7 +6,8 @@
 
 <section class="any-page-table">
     <div class="page-header">
-        <h3>المحفظ : @Model.employee.Name (@Model.GroupName)</h3>
+        <h4>المحفظ : @Model.employee.Name</h4>
+        <h3>@Model.GroupName</h3>
     </div>
     <div class="table-responsive" id="Table">
         <table class="table table-bordered table-striped">
@@ -34,17 +35,6 @@
                 @foreach (var item in Model.Students)
                 {
 
-                    string datearabic = item.Joinplace.ToString("yyyy/MM/dd").Replace('0', '\u06f0')
-                        .Replace('1', '\u06f1')
-                        .Replace('2', '\u06f2')
-                        .Replace('3', '\u06f3')
-                        .Replace('4', '\u06f4')
-                        .Replace('5', '\u06f5')
-                        .Replace('6', '\u06f6')
-                        .Replace('7', '\u06f7')
-                        .Replace('8', '\u06f8')
-                        .Replace('9', '\u06f9');
-
                     <tr>
                         <td class="no-break">@i</td>
                         <td>
@@ -54,7 +44,7 @@
                         <td>@item.phone</td>
                         <td>@item.FatherJob</td>
                         <td>@item.Birthdate.ToString("yyyy/MM/dd")</td>
-                        <td>@datearabic</td>
+                        <td>@item.Joinplace.ToString("yyyy/MM/dd")</td>
                         <td>
                             <a class="btn btn-warning" asp-controller="WaitingStudent" asp-action="Edit" asp-route-id="@item.studentId">تعديل</a>
                             <a class="btn btn-danger confirm" asp-controller="WaitingStudent" asp-action="Delete" asp-route-id="@item.studentId">حذف</a>

@@ -22,7 +22,7 @@
                         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
 
-                            @if (User.IsInRole("admin"))
+                            @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item active">
                                     <a class="nav-link" asp-controller="UserApp" asp-action="Index">المستخدمين <span class="sr-only">(current)</span></a>
@@ -66,7 +66,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

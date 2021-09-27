@@ -11,7 +11,7 @@ namespace Mangement_System.Data.Repositories.Interfaces
         T Add(T Entity);
         T Find(int id);
         void update(T Entity);
-        void delete(int id);
+        Boolean delete(int id);
         void commit();
     }
 }

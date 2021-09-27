@@ -26,12 +26,20 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
             dbContext.SaveChanges();
         }
 
-        public void delete(int id)
+        public Boolean delete(int id)
         {
-            var employee = Find(id);
-            if (employee == null) return;
-            dbContext.Employees.Remove(employee);
-            commit();
+            try
+            {
+                var employee = Find(id);
+                if (employee == null) return false;
+                dbContext.Employees.Remove(employee);
+                commit();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public Employee Find(int id)

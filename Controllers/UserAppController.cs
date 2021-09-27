@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Mangement_System.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Admin")]
     public class UserAppController : Controller
     {
         readonly private IRepositoryUser<User> Users;

@@ -27,12 +27,21 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
             dbContext.SaveChanges();
         }
 
-        public void delete(int id)
+        public Boolean delete(int id)
         {
-            var group = Find(id);
-            if (group == null) return;
-            dbContext.groups.Remove(group);
-            commit();
+            
+            try
+            {
+                var group = Find(id);
+                if (group == null) return false;
+                dbContext.groups.Remove(group);
+                commit();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public Group Find(int id)

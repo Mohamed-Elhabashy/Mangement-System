@@ -66,7 +66,7 @@
                         <td>@item.Salary</td>
                         <td>@item.Birthdate.ToString("yyyy/MM/dd")</td>
                         <td>@item.JoinInStaff.ToString("yyyy/MM/dd")</td>
-                        @if (User.IsInRole("admin"))
+                        @if (User.IsInRole("Admin"))
                         {
                             <td>
                                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.EmployeeId">تعديل</a>

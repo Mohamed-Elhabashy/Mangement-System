@@ -31,6 +31,8 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         {
             var user = Find(id);
             if (user == null) return;
+            if (user.UserName=="admin") return;
+
             dbContext.Users.Remove(user);
             commit();
         }

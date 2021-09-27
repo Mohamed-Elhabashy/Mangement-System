@@ -13,16 +13,19 @@
                         <input type="hidden" asp-for="EmployeeId" />
                         <input type="hidden" asp-for="JoinInStaff" />
                         <div class="form-group">
+                            <label class="control-label">الاسم</label>
                             <input asp-for="Name" class="form-control" placeholder="الاسم" />
                             <small asp-validation-for="Name" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group">
+                            <label class="control-label">البلد</label>
                             <input asp-for="country" class="form-control" placeholder="البلد" />
                             <small asp-validation-for="country" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group">
+                            <label class="control-label">الوظيفة</label>
                             <select asp-for="Role" class="form-control">
-                                <option value="">اختر الوظيفه</option>
+                                <option value=""></option>
                                 <option value="محفظ">محفظ</option>
                                 <option value="سكرتير">سكرتير</option>
                                 <option value="الدادا">الدادا</option>
@@ -32,39 +35,46 @@
 
                         </div>
                         <div class="form-group">
+                            <label class="control-label">المؤهل الدراسي</label>
                             <input asp-for="Areaofstudy" class="form-control" placeholder="المؤهل الدراسي" />
                             <small asp-validation-for="Areaofstudy" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group">
+                            <label class="control-label">الهاتف</label>
                             <input asp-for="Phone" class="form-control" placeholder="الهاتف" />
                             <small asp-validation-for="Phone" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group">
+                            <label class="control-label">الرقم القومي</label>
                             <input asp-for="NationalId" class="form-control" placeholder="الرقم القومي" />
                             <small asp-validation-for="NationalId" class="text-danger form-text text-right"></small>
                         </div>
 
                         <div class="form-group">
+                            <label class="control-label">العنوان</label>
                             <input asp-for="Address" class="form-control" placeholder="العنوان" />
                             <small asp-validation-for="Address" class="text-danger form-text text-right"></small>
                         </div>
 
                         <div class="form-group">
+                            <label class="control-label">النوع</label>
                             <input asp-for="gender" class="form-control" placeholder="النوع" />
                             <small asp-validation-for="gender" class="text-danger form-text text-right"></small>
                         </div>
 
                         <div class="form-group">
+                            <label class="control-label">الحالة الاجتماعية</label>
                             <input asp-for="Socialstatus" class="form-control" placeholder="الحالة الاجتماعية" />
                             <small asp-validation-for="Socialstatus" class="text-danger form-text text-right"></small>
                         </div>
-
                         <div class="form-group">
+                            <label class="control-label">المرتب</label>
                             <input asp-for="Salary" class="form-control" placeholder="المرتب" />
                             <small asp-validation-for="Salary" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group">
-                            <input asp-for="Birthdate" class="form-control" placeholder="تاريخ الميلاد" />
+                            <label class="control-label">تاريخ الميلاد</label>
+                            <input asp-for="Birthdate" type="date" class="form-control" placeholder="تاريخ الميلاد" />
                             <small asp-validation-for="Birthdate" class="text-danger form-text text-right"></small>
                         </div>
                         <div class="form-group my-4">
