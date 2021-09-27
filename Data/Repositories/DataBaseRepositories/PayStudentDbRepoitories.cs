@@ -54,7 +54,7 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         public IList<PayStudent> Search(string name)
         {
             if (name == null) name = "";
-            return dbContext.payStudents.Include(s => s.student).Where(item => item.student.StudentName.Contains(name)).ToList();
+            return dbContext.payStudents.Include(s => s.student).ThenInclude(g => g.Group).OrderByDescending(p => p.PayStudentId).Where(item => item.student.StudentName.Contains(name)).ToList();
         }
         
         public void update(PayStudent item)

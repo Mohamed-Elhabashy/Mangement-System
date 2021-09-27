@@ -35,6 +35,7 @@ namespace Mangement_System.Controllers
         {
             int pagenumber = page ?? 1;
             ViewBag.function = "Filter";
+            ViewBag.name = Name;
             var model = paystudentRepo.Search(Name);
             ViewBag.TotalPageProblem = (model.Count() / 25) + (model.Count() % 25 == 0 ? 0 : 1);
             if (pagenumber < 0 || pagenumber > ViewBag.TotalPageProblem) pagenumber = 1;
