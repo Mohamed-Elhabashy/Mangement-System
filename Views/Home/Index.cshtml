@@ -2,33 +2,51 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="container counter-section">
-    <div class="row">
-        <div class="col-md-6">
-            <p>الفلوس</p>
-            <br />
-            <p>@Model.TotalMoney</p>
+<div class="row" style="margin:14px;">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">الفلوس</h5>
+                <h3 class="card-text text-center">@Model.TotalMoney</h3>
+            </div>
         </div>
-        <div class="col-md-6">
-            <p>عدد الطلاب على قائمه الانتظار</p>
-            <br />
-            <p>@Model.NumberWaitingStudent</p>
-        </div>
-        <div class="col-md-6">
-            <p>عدد الطلاب الملتحقين فى الكتاب</p>
-            <br />
-            <p>@Model.NumberStudent</p>
-        </div>
-        <div class="col-md-6">
-            <p>عدد المجاميع</p>
-            <br />
-            <p>@Model.NumberGroup</p>
-        </div>
-        <div class="col-md-6">
-            <p>عدد العاملين</p>
-            <br />
-            <p>@Model.Employee</p>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">عدد الطلاب على قائمه الانتظار</h5>
+                <h3 class="card-text text-center">@Model.NumberWaitingStudent</h3>
+            </div>
         </div>
     </div>
 </div>
+<div class="row" style="margin:14px;">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">عدد العاملين</h5>
+                <h3 class="card-text text-center">@Model.Employee</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">عدد المجاميع</h5>
+                <h3 class="card-text text-center">@Model.NumberGroup</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin:14px;">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">عدد الطلاب الملتحقين فى الكتاب</h5>
+                <h3 class="card-text text-center">@Model.NumberStudent</h3>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
