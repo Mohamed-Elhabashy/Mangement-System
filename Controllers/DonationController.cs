@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Mangement_System.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,secretary")]
     public class DonationController : Controller
     {
         readonly private IRepositoryMoney<Money> MoneyRepo;

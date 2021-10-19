@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Mangement_System.Controllers
 {
+
     [Authorize]
     public class EmployeeController : Controller
     {
@@ -18,6 +19,7 @@ namespace Mangement_System.Controllers
         {
             employee = _employee;
         }
+        [Authorize(Roles = "Admin,secretary")]
         public ActionResult Index()
         {
             var list = employee.List();
@@ -58,10 +60,9 @@ namespace Mangement_System.Controllers
         {
             try
             {
-                var emp = employee.Find(item.EmployeeId);
-                if(emp.Role == "محفظ" && item.Role!= "محفظ")
+               
+                if(employee.update(item)==false)
                     return RedirectToAction("Cannot");
-                employee.update(item);
                 return RedirectToAction(nameof(Index));
             }
             catch

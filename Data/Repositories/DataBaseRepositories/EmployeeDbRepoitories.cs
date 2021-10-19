@@ -30,6 +30,8 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         {
             try
             {
+                var listgroup = dbContext.groups.Where(g => g.EmployeeId == id).ToList();
+                if (listgroup.Count() > 0) return false;
                 var employee = Find(id);
                 if (employee == null) return false;
                 dbContext.Employees.Remove(employee);
@@ -52,10 +54,13 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
             return dbContext.Employees.ToList();
         }
 
-        public void update(Employee employee)
+        public Boolean update(Employee employee)
         {
+            var listgroup = dbContext.groups.Where(g => g.EmployeeId == employee.EmployeeId).ToList();
+            if (listgroup.Count() > 0 && employee.Role!="محفظ") return false;
             dbContext.Employees.Update(employee);
             commit();
+            return true;
         }
     }
 }

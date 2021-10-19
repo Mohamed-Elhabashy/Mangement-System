@@ -10,7 +10,7 @@ namespace Mangement_System.Data.Repositories.Interfaces
         IList<T> List();
         T Add(T Entity);
         T Find(int id);
-        void update(T Entity);
+        Boolean update(T Entity);
         Boolean delete(int id);
         void commit();
     }

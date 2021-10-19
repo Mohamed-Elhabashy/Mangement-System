@@ -1,6 +1,7 @@
 ﻿using Mangement_System.Data.Models;
 using Mangement_System.Data.Repositories.Interfaces;
 using Mangement_System.ViewModels.payment;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using X.PagedList;
 namespace Mangement_System.Controllers
 {
+    [Authorize(Roles = "Admin,secretary")]
     public class paymentController : Controller
     {
         readonly private IRepository<Group> groups;

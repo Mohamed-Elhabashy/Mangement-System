@@ -58,6 +58,7 @@ namespace Mangement_System.Areas.Identity.Pages.Account
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
+            public string userRole { get; set; }
 
         }
 
@@ -84,7 +85,7 @@ namespace Mangement_System.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "User");
+                    await _userManager.AddToRoleAsync(user, Input.userRole);
                     _logger.LogInformation("User created a new account with password.");
                     return LocalRedirect("~/UserApp");
                 }

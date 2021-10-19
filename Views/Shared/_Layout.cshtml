@@ -28,18 +28,22 @@
                                     <a class="nav-link" asp-controller="UserApp" asp-action="Index">المستخدمين <span class="sr-only">(current)</span></a>
                                 </li>
                             }
-                            <li class="nav-item active">
-                                <a class="nav-link" asp-controller="Donation" asp-action="Index">التبرعات <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" asp-controller="Export" asp-action="Index">الصادارات <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" asp-controller="payment" asp-action="Index">الاشتراكات <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" asp-controller="Employee" asp-action="Index">الموظفين <span class="sr-only">(current)</span></a>
-                            </li>
+                            @if (User.IsInRole("Admin") || User.IsInRole("secretary"))
+                            {
+                                <li class="nav-item active">
+                                    <a class="nav-link" asp-controller="Donation" asp-action="Index">التبرعات <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" asp-controller="Export" asp-action="Index">الصادارات <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" asp-controller="payment" asp-action="Index">الاشتراكات <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" asp-controller="Employee" asp-action="Index">الموظفين <span class="sr-only">(current)</span></a>
+                                </li>
+                            }
+
                             <li class="nav-item active">
                                 <a class="nav-link" asp-controller="Group" asp-action="Index">المجموعات <span class="sr-only">(current)</span></a>
                             </li>
@@ -49,7 +53,6 @@
                             <li class="nav-item active">
                                 <a class="nav-link" asp-controller="Home" asp-action="Index">الصفحة الرئيسية <span class="sr-only">(current)</span></a>
                             </li>
-
                         </ul>
                         <partial name="_LoginPartial" />
                     </div>

@@ -22,9 +22,17 @@
                 <input asp-for="Input.Password" class="form-control form-control-lg" id="colFormLabelLg" placeholder="الرقم السرى">
             </div>
             <div class="form-group row">
+                <select asp-for="Input.userRole" class="form-control">
+                    <option value="">اختر المسؤلية</option>
+                    <option value="Admin">مسئول عام</option>
+                    <option value="secretary">سكرتير</option>
+                    <option value="OnlyStudent">مسئول الطلاب</option>
+                </select>
+            </div>
+            <div class="form-group row">
                 <input type="submit" value="إضافة" class="form-control form-control-lg btn btn-primary" id="colFormLabelLg">
             </div>
-            
+
         </form>
     </div>
 </div>

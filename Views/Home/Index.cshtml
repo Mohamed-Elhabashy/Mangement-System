@@ -7,7 +7,15 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title text-center"><b>الفلوس</b></h3>
-                <h4 class="card-text text-center"><b>@Model.TotalMoney</b></h4>
+
+                @if (User.IsInRole("Admin") || User.IsInRole("secretary"))
+                {
+                    <h4 class="card-text text-center"><b>@Model.TotalMoney</b></h4>
+                }
+                else
+                {
+                    <h4 class="card-text text-center"><b>------</b></h4>
+                }
             </div>
         </div>
     </div>
@@ -15,7 +23,14 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title text-center"><b>عدد الطلاب على قائمه الانتظار</b></h3>
-                <h4 class="card-text text-center"><b>@Model.NumberWaitingStudent</b></h4>
+                @if (User.IsInRole("Admin") || User.IsInRole("secretary"))
+                {
+                    <h4 class="card-text text-center"><b>@Model.NumberWaitingStudent</b></h4>
+                }
+                else
+                {
+                    <h4 class="card-text text-center"><b>------</b></h4>
+                }
             </div>
         </div>
     </div>
@@ -25,7 +40,14 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title text-center"><b>عدد العاملين</b></h3>
-                <h4 class="card-text text-center"><b>@Model.Employee</b></h4>
+                @if (User.IsInRole("Admin") || User.IsInRole("secretary"))
+                {
+                    <h4 class="card-text text-center"><b>@Model.Employee</b></h4>
+                }
+                else
+                {
+                    <h4 class="card-text text-center"><b>------</b></h4>
+                }
             </div>
         </div>
     </div>
@@ -33,7 +55,15 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title text-center"><b>عدد المجاميع</b></h3>
-                <h4 class="card-text text-center"><b>@Model.NumberGroup</b></h4>
+                @if (User.IsInRole("Admin") || User.IsInRole("secretary"))
+                {
+                    <h4 class="card-text text-center"><b>@Model.NumberGroup</b></h4>
+                }
+                else
+                {
+                    <h4 class="card-text text-center"><b>------</b></h4>
+                }
+
             </div>
         </div>
     </div>
@@ -43,10 +73,17 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title text-center"><b>عدد الطلاب الملتحقين فى الكتاب</b></h3>
-                <h4 class="card-text text-center"><b>@Model.NumberStudent</b></h4>
+                @if (User.IsInRole("Admin") || User.IsInRole("secretary"))
+                {
+                    <h4 class="card-text text-center"><b>@Model.NumberStudent</b></h4>
+                }
+                else
+                {
+                    <h4 class="card-text text-center"><b>------</b></h4>
+                }
             </div>
         </div>
     </div>
-    
+
 </div>
 

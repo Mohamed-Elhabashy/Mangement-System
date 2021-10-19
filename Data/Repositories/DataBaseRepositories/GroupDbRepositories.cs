@@ -59,10 +59,11 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
                 .ToList();
         }
 
-        public void update(Group group)
+        public Boolean update(Group group)
         {
             dbContext.groups.Update(group);
             commit();
+            return true;
         }
     }
 }
