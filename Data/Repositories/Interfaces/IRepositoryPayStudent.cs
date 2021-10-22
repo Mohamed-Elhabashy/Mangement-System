@@ -16,5 +16,6 @@ namespace Mangement_System.Data.Repositories.Interfaces
         IList<PayStudent> ListAll();
         void commit();
         IList<T> Search(string name);
+        Boolean IsPayment(int studentId, DateTime date);
     }
 }

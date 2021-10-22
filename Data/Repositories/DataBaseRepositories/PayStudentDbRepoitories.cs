@@ -62,6 +62,12 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
             dbContext.payStudents.Update(item);
             commit();
         }
-        
+        Boolean IRepositoryPayStudent<PayStudent>.IsPayment(int studentId, DateTime date)
+        {
+            var list = dbContext.payStudents.Where(p => p.StudentId == studentId && p.date==date).ToList();
+            if(list.Count()>0)
+                return true;
+            return false;
+        }
     }
 }
