@@ -16,7 +16,10 @@
                     <th>الاسم</th>
                     <th>المبلغ</th>
                     <th>التاريخ</th>
-                    <th>تحكم</th>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <th>تحكم</th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -37,17 +40,49 @@
                         </td>
                         <td>@item.TotalMoney</td>
                         <td>@item.DateOfMoney.ToString("yyyy/MM/dd")</td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.MoneyId">تعديل</a>
+                                <a class="btn btn-danger confirm" asp-action="Delete" asp-route-id="@item.MoneyId">حذف</a>
+                            </td>
+                        }
 
-                        <td>
-                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.MoneyId">تعديل</a>
-                            <a class="btn btn-danger confirm" asp-action="Delete" asp-route-id="@item.MoneyId">حذف</a>
-                        </td>
                     </tr>
                     i++;
                 }
             </tbody>
         </table>
     </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @if (ViewBag.Pagenum > 1)
+            {
+
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.Pagenum-1)" aria-label="السابق">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">السابق</span>
+                    </a>
+                </li>
+
+            }
+            @for (int j = 1; j <= ViewBag.TotalPageProblem; j++)
+            {
+                <li class="@(ViewBag.Pagenum==j?"page-item active":"")"><a class="page-link" asp-action="Index" asp-route-page="@j">@j</a></li>
+            }
+            @if (ViewBag.Pagenum < ViewBag.TotalPageProblem)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.Pagenum+1)" aria-label="التالى">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">التالى</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
 </section>
 
 

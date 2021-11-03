@@ -29,7 +29,10 @@
                     <th>المبلغ</th>
                     <th>تاريخ الدفع</th>
                     <th>تاريخ العملية</th>
-                    <th>تحكم</th>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <th>تحكم</th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -53,10 +56,13 @@
                         <td>@item.TotalPay</td>
                         <td>@item.date.ToString("yyyy/MM/dd")</td>
                         <td>@item.DateOfPay.ToString("yyyy/MM/dd")</td>
-                        <td>
-                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.PayStudentId">تعديل</a>
-                            <a class="btn btn-danger confirm" asp-action="Delete" asp-route-id="@item.PayStudentId">حذف</a>
-                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.PayStudentId">تعديل</a>
+                                <a class="btn btn-danger confirm" asp-action="Delete" asp-route-id="@item.PayStudentId">حذف</a>
+                            </td>
+                        }
                     </tr>
                     i++;
                 }

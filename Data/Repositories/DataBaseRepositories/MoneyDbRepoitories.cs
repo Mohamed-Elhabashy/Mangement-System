@@ -46,7 +46,7 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
 
         public IList<Money> ListType(int type)
         {
-            return dbContext.money.Where(m => m.TypeMoney == type).ToList();
+            return dbContext.money.Where(m => m.TypeMoney == type).OrderByDescending(m => m.MoneyId).ToList();
         }
 
         public void update(Money money)

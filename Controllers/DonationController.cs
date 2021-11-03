@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Mangement_System.Controllers
 {
@@ -18,10 +19,15 @@ namespace Mangement_System.Controllers
         {
             MoneyRepo = _MoneyRepo;
         }
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            int pagenumber = page ?? 1;
             var List = MoneyRepo.ListType(3);
-            return View(List);
+            ViewBag.TotalPageProblem = (List.Count() / 25) + (List.Count() % 25 == 0 ? 0 : 1);
+            if (pagenumber < 0 || pagenumber > ViewBag.TotalPageProblem) pagenumber = 1;
+            ViewBag.Pagenum = pagenumber;
+            var model = List.ToPagedList(pagenumber, 25);
+            return View(model);
         }
 
         public ActionResult Create()
@@ -46,7 +52,8 @@ namespace Mangement_System.Controllers
             }
         }
 
-        
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var money = MoneyRepo.Find(id);
@@ -54,6 +61,7 @@ namespace Mangement_System.Controllers
             return View(money);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Money money)
@@ -69,6 +77,7 @@ namespace Mangement_System.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             MoneyRepo.delete(id);

@@ -96,11 +96,15 @@ namespace Mangement_System.Controllers
                 return View();
             }
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             paystudentRepo.delete(id);
             return RedirectToAction(nameof(Index));
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var model = paystudentRepo.Find(id);
@@ -108,6 +112,7 @@ namespace Mangement_System.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(PayStudent model)
