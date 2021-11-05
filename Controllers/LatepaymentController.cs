@@ -30,10 +30,17 @@ namespace Mangement_System.Controllers
             };
             return View(model);
         }
-        public ActionResult Search(int GroupId, DateTime date)
+        public ActionResult Search(int? GroupId, DateTime date)
         {
+            if (GroupId == null)
+            {
+                return RedirectToAction("Index");
+            }
+            TempData["FunctionLatePayment"] = "true";
+            TempData["groudid"] = GroupId;
+            TempData["Date"] = date;
             IList<Student> _students= new List<Student>();
-            var allstudent = groups.Find(GroupId).Students;
+            var allstudent = groups.Find((int)GroupId).Students;
             foreach(var item in allstudent)
             {
                 if (paystudentRepo.IsPayment(item.studentId, date) == false)

@@ -63,7 +63,9 @@ namespace Mangement_System.Controllers
             {
                 return RedirectToAction(nameof(ListGroups));
             }
+            TempData["FunctionSelectGroup"] = "true";
             GId = (int)GroupId;
+            TempData["groudid"] = GId;
             var listStudent = groups.Find(GId).Students;
             var Listgroups = groups.List();
             var model = new PaymentViewModel()
@@ -88,8 +90,12 @@ namespace Mangement_System.Controllers
             try
             {
                 model.DateOfPay = DateTime.Now;
-                paystudentRepo.Add(model);
-                return RedirectToAction(nameof(Index));
+                paystudentRepo.Add(model); 
+                if (TempData.ContainsKey("FunctionSelectGroup") && TempData.ContainsKey("groudid"))
+                    return RedirectToAction("SelectGroup", new { GroupId = TempData["groudid"] });
+                else if(TempData.ContainsKey("FunctionLatePayment") && TempData.ContainsKey("groudid") && TempData.ContainsKey("Date"))
+                    return RedirectToAction("Search", "Latepayment", new { GroupId = TempData["groudid"], date = TempData["Date"] });
+                return RedirectToAction(nameof(ListGroups));
             }
             catch
             {

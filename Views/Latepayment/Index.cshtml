@@ -17,7 +17,7 @@
             </select>
             <div class="form-group">
                 <label class="control-label">التاريخ</label>
-                <input name="date" type="month" class="form-control" placeholder="تاريخ الدفع" />
+                <input required name="date" type="month" class="form-control" placeholder="تاريخ الدفع" />
                 <small asp-validation-for="date" class="text-danger form-text text-right"></small>
             </div>
             <div class="form-group my-4">
@@ -38,6 +38,7 @@
                     <tr class="no-break">
                         <th>#</th>
                         <th>اسم الطالب</th>
+                        <th>تحكم</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +46,7 @@
                     {
                         <tr>
                             <!-- if Not Result -->
-                            <td colspan="2"><b>لا يوجد بيانات</b></td>
+                            <td colspan="3"><b>لا يوجد بيانات</b></td>
                         </tr>
                     }
                     @{int i = 1; }
@@ -55,6 +56,9 @@
                             <td class="no-break">@i</td>
                             <td>
                                 @item.StudentName
+                            </td>
+                            <td>
+                                <a class="btn btn-info" asp-controller="payment" asp-action="AddPayment" asp-route-studentid="@item.studentId">دفع</a>
                             </td>
                         </tr>
                         i++;
