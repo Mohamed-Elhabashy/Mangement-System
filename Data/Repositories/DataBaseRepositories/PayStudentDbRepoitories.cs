@@ -15,11 +15,14 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         {
             dbContext = _dbContext;
         }
-        public PayStudent Add(PayStudent item)
+        public Boolean Add(PayStudent item)
         {
+            var model = dbContext.payStudents.Where(p => p.StudentId == item.StudentId && p.date == item.date).ToList();
+            if (model.Count() > 0)
+                return false;
             dbContext.payStudents.Add(item);
             commit();
-            return item;
+            return true;
         }
 
         public void commit()

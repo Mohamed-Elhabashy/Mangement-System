@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Mangement_System.Data.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section class="any-page-table">
+    <div class="page-header">
+        <a asp-action="index" class="btn btn-secondary">الطلاب الملتحقين</a>
+        <form asp-action="Filter" method="POST">
+            <div class="form-row">
+                <div class="col-6">
+                    <input class="form-control" name="Name" placeholder="الاسم">
+                </div>
+                <div class="col">
+                    <button class="form-control btn-info">بحث</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="table-responsive" id="Table">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="no-break">
+                    <th>#</th>
+                    <th>اسم الطالب</th>
+                    <th>اسم المجموعة</th>
+                    <th>تحكم</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() == 0)
+                {
+                    <tr>
+                        <!-- if Not Result -->
+                        <td colspan="8"><b>لا يوجد بيانات</b></td>
+                    </tr>
+                }
+                @{int i = 1; }
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td class="no-break">@i</td>
+                        <td>
+                            @item.StudentName
+                        </td>
+                        <td>@item.Group.GroupName</td>
+
+                        <td>
+                            <a class="btn btn-info" asp-controller="payment" asp-action="AddPayment" asp-route-studentid="@item.studentId">دفع</a>
+                        </td>
+                    </tr>
+                    i++;
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @if (ViewBag.Pagenum > 1)
+            {
+
+                @if (ViewBag.function == "Filter")
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Filter" asp-route-page="@(ViewBag.Pagenum-1)" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year" aria-label="السابق">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">السابق</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.Pagenum-1)" aria-label="السابق">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">السابق</span>
+                        </a>
+                    </li>
+                }
+
+            }
+            @for (int j = 1; j <= ViewBag.TotalPageProblem; j++)
+            {
+                if (ViewBag.function == "Filter")
+                {
+                    <li class="@(ViewBag.Pagenum==j?"page-item active":"")"><a class="page-link" asp-action="Filter" asp-route-page="@j" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year">@j</a></li>
+                }
+                else
+                {
+                    <li class="@(ViewBag.Pagenum==j?"page-item active":"")"><a class="page-link" asp-action="Index" asp-route-page="@j">@j</a></li>
+                }
+
+            }
+            @if (ViewBag.Pagenum < ViewBag.TotalPageProblem)
+            {
+
+                @if (ViewBag.function == "Filter")
+                {
+
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Filter" asp-route-page="@(ViewBag.Pagenum+1)" asp-route-Name="@ViewBag.name" asp-route-Year="@ViewBag.Year" aria-label="التالى">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">التالى</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.Pagenum+1)" aria-label="التالى">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">التالى</span>
+                        </a>
+                    </li>
+                }
+
+            }
+        </ul>
+    </nav>
+</section>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

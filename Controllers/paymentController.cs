@@ -90,7 +90,14 @@ namespace Mangement_System.Controllers
             try
             {
                 model.DateOfPay = DateTime.Now;
-                paystudentRepo.Add(model); 
+                var result = paystudentRepo.Add(model);
+                if (result == false)
+                {
+                    return RedirectToAction(nameof(AlreadyPay));
+                }
+                if (TempData.ContainsKey("JoinedStudentController")){
+                    return RedirectToAction("index", "JoinedStudent");
+                }
                 if (TempData.ContainsKey("FunctionSelectGroup") && TempData.ContainsKey("groudid"))
                     return RedirectToAction("SelectGroup", new { GroupId = TempData["groudid"] });
                 else if(TempData.ContainsKey("FunctionLatePayment") && TempData.ContainsKey("groudid") && TempData.ContainsKey("Date"))
@@ -132,6 +139,10 @@ namespace Mangement_System.Controllers
             {
                 return View();
             }
+        }
+        public ActionResult AlreadyPay()
+        {
+            return View();
         }
 
     }

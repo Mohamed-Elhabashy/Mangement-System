@@ -133,7 +133,7 @@ namespace Mangement_System.Controllers
             ViewBag.function = "Filter";
             ViewBag.name = Name;
             ViewBag.Year = year;
-            var model = students.Search(Name, year);
+            var model = students.Search(Name,false, year);
             ViewBag.TotalPageProblem = (model.Count() / 25) + (model.Count() % 25 == 0 ? 0 : 1);
             if (pagenumber < 0 || pagenumber > ViewBag.TotalPageProblem) pagenumber = 1;
             ViewBag.Pagenum = pagenumber;

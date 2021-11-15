@@ -48,6 +48,12 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
                 .Include(g => g.Group)
                 .ToList();
         }
+        public IList<Student> JoinedStudents()
+        {
+            return dbContext.students
+                .Include(g => g.Group)
+                .Where(s => s.GroupId !=null ).ToList();
+        }
 
         public List<Student> ListSpecificStudent(int? groupId)
         {
@@ -78,18 +84,33 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
             dbContext.students.Update(student);
             commit();
         }
-        public IList<Student> Search(string name, int? year)
+        public IList<Student> Search(string name,Boolean Joined, int? year)
         {
+            if(Joined== true)
+            {
+                return dbContext.students
+                    .Include(g => g.Group)
+                    .Where(item =>
+                   item.StudentName.Contains(name)
+                   && item.GroupId != null
+                ).ToList();
+            }
             if (name == null) name = "";
             if (year == null)
             {
-                return dbContext.students.Where(item =>
-                       item.StudentName.Contains(name)
+                return dbContext.students
+                    .Include(g => g.Group)
+                    .Where(item =>
+                       item.StudentName.Contains(name) &&
+                       item.GroupId==null
                     ).ToList();
             }
-            return dbContext.students.Where(item =>
+            return dbContext.students
+                .Include(g => g.Group)
+                .Where(item =>
                    item.StudentName.Contains(name)
-                   && item.Birthdate.Year==year
+                   && item.Birthdate.Year==year &&
+                       item.GroupId == null
                 ).ToList();
         }
     }
