@@ -33,6 +33,9 @@
                     <tr class="no-break">
                         <th>#</th>
                         <th>اسم الطالب</th>
+                        <th>الشهر الأول</th>
+                        <th>الشهر الثانى</th>
+                        <th>الشهر الثالث</th>
                         <th>تحكم</th>
                     </tr>
                 </thead>
@@ -41,7 +44,7 @@
                     {
                         <tr>
                             <!-- if Not Result -->
-                            <td colspan="3"><b>لا يوجد بيانات</b></td>
+                            <td colspan="6"><b>لا يوجد بيانات</b></td>
                         </tr>
                     }
                     @{int i = 1; }
@@ -50,15 +53,20 @@
 
 
 
-                        <tr>
-                            <td class="no-break">@i</td>
-                            <td>
-                                @item.StudentName
-                            </td>
-                            <td>
-                                <a class="btn btn-info" asp-action="AddPayment" asp-route-studentid="@item.studentId">دفع</a>
-                            </td>
-                        </tr>
+                <tr>
+                    <td class="no-break">@i</td>
+                    <td>
+                        @item.Student_Name
+                    </td>
+
+                    <td>@item.LastPayment.ElementAt(0)</td>
+                    <td>@item.LastPayment.ElementAt(1)</td>
+                    <td>@item.LastPayment.ElementAt(2)</td>
+              
+                    <td>
+                        <a class="btn btn-info" asp-action="AddPayment" asp-route-studentid="@item.Student_id" asp-route-func="FunctionSelectGroup">دفع</a>
+                    </td>
+                </tr>
                         i++;
                     }
 

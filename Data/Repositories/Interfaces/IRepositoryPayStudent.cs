@@ -9,6 +9,8 @@ namespace Mangement_System.Data.Repositories.Interfaces
     public interface IRepositoryPayStudent<T>
     {
         IList<T> List(int groupid);
+        IList<T> LastThreePayment(int? groupid,int student_id);
+
         Boolean Add(T Entity);
         T Find(int id);
         void update(T Entity);

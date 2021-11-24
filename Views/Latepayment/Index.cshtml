@@ -58,7 +58,7 @@
                                 @item.StudentName
                             </td>
                             <td>
-                                <a class="btn btn-info" asp-controller="payment" asp-action="AddPayment" asp-route-studentid="@item.studentId">دفع</a>
+                                <a class="btn btn-info" asp-controller="payment" asp-action="AddPayment" asp-route-studentid="@item.studentId" asp-route-func="FunctionLatePayment">دفع</a>
                             </td>
                         </tr>
                         i++;

@@ -36,9 +36,6 @@ namespace Mangement_System.Controllers
             {
                 return RedirectToAction("Index");
             }
-            TempData["FunctionLatePayment"] = "true";
-            TempData["groudid"] = GroupId;
-            TempData["Date"] = date;
             IList<Student> _students= new List<Student>();
             var allstudent = groups.Find((int)GroupId).Students;
             foreach(var item in allstudent)

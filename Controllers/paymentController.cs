@@ -1,5 +1,6 @@
 ﻿using Mangement_System.Data.Models;
 using Mangement_System.Data.Repositories.Interfaces;
+using Mangement_System.ViewModels.JoinedStudent;
 using Mangement_System.ViewModels.payment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -63,22 +64,22 @@ namespace Mangement_System.Controllers
             {
                 return RedirectToAction(nameof(ListGroups));
             }
-            TempData["FunctionSelectGroup"] = "true";
             GId = (int)GroupId;
-            TempData["groudid"] = GId;
-            var listStudent = groups.Find(GId).Students;
+            var listStudent = groups.Find(GId).Students.ToList();
+            var ListPayment=getPaymentStudent(listStudent);
             var Listgroups = groups.List();
             var model = new PaymentViewModel()
             {
                 groups = Listgroups,
-                students = listStudent
+                students = ListPayment
             };
             return View("ListGroups", model);
         }
         
-        public ActionResult AddPayment(int studentid)
+        public ActionResult AddPayment(int studentid,string func)
         {
             ViewBag.StudentId = studentid;
+            TempData[func] = true;
             return View();
         }
 
@@ -96,12 +97,19 @@ namespace Mangement_System.Controllers
                     return RedirectToAction(nameof(AlreadyPay));
                 }
                 if (TempData.ContainsKey("JoinedStudentController")){
+                    TempData.Remove("JoinedStudentController");
                     return RedirectToAction("index", "JoinedStudent");
                 }
-                if (TempData.ContainsKey("FunctionSelectGroup") && TempData.ContainsKey("groudid"))
-                    return RedirectToAction("SelectGroup", new { GroupId = TempData["groudid"] });
-                else if(TempData.ContainsKey("FunctionLatePayment") && TempData.ContainsKey("groudid") && TempData.ContainsKey("Date"))
-                    return RedirectToAction("Search", "Latepayment", new { GroupId = TempData["groudid"], date = TempData["Date"] });
+                if (TempData.ContainsKey("FunctionSelectGroup"))
+                {
+                    TempData.Remove("FunctionSelectGroup");
+                    return RedirectToAction("ListGroups");
+                }
+                else if(TempData.ContainsKey("FunctionLatePayment"))
+                {
+                    TempData.Remove("FunctionLatePayment");
+                    return RedirectToAction("Index", "Latepayment");
+                }
                 return RedirectToAction(nameof(ListGroups));
             }
             catch
@@ -144,6 +152,36 @@ namespace Mangement_System.Controllers
         {
             return View();
         }
+        public List<StudentPaymentViewModelClass> getPaymentStudent(List<Student> list)
+        {
+            var ListStudent = new List<StudentPaymentViewModelClass>();
+            foreach (var model in list)
+            {
 
+                var last3payment = paystudentRepo.LastThreePayment(model.GroupId, model.studentId);
+                StudentPaymentViewModelClass item = new StudentPaymentViewModelClass()
+                {
+                    Student_id = model.studentId,
+                    Student_Name = model.StudentName,
+                    group_id = model.GroupId,
+                    Group_Name = model.Group.GroupName,
+                    LastPayment = new List<string>() { }
+                };
+                while (item.LastPayment.Count() < 3)
+                {
+                    if (last3payment.Count() > 0)
+                    {
+                        item.LastPayment.Add(String.Format("{0:MM/yyyy}", last3payment.FirstOrDefault().date));
+                        last3payment.RemoveAt(0);
+                    }
+                    else
+                    {
+                        item.LastPayment.Add("----/--");
+                    }
+                }
+                ListStudent.Add(item);
+            }
+            return ListStudent;
+        }
     }
 }

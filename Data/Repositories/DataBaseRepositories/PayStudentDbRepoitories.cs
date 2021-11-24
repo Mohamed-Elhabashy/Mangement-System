@@ -49,6 +49,11 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         {
             return dbContext.payStudents.Include(p => p.student).Where(p => p.student.GroupId == groupid).ToList();
         }
+        public IList<PayStudent> LastThreePayment(int? groupid, int student_id)
+        {
+            if(groupid ==null)return null;
+            return dbContext.payStudents.Include(p => p.student).Where(p => p.student.GroupId == groupid && p.StudentId== student_id).OrderByDescending(p=>p.PayStudentId).Take(3).ToList();
+        }
         public IList<PayStudent> ListAll()
         {
             return dbContext.payStudents.Include(p => p.student).ThenInclude(g=>g.Group).OrderByDescending(p => p.PayStudentId).ToList();
@@ -62,7 +67,9 @@ namespace Mangement_System.Data.Repositories.DataBaseRepositories
         
         public void update(PayStudent item)
         {
-            dbContext.payStudents.Update(item);
+            var model=dbContext.payStudents.Find(item.PayStudentId);
+            model.TotalPay = item.TotalPay;
+            model.date = item.date;
             commit();
         }
         Boolean IRepositoryPayStudent<PayStudent>.IsPayment(int studentId, DateTime date)
